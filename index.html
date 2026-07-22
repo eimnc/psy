@@ -128,7 +128,7 @@
     ::selection{background:rgba(28,27,25,0.12)}
     input::placeholder,textarea::placeholder{color:#a3a09a}
     img{user-select:none}
-    @media (max-width:768px){[data-hide-m="true"]{display:none !important}}
+    @media (max-width:768px){[data-hide-m="true"]{display:none !important} nav{gap:14px !important} nav>a[href="#top"]{min-width:0;overflow:hidden;text-overflow:ellipsis}}
     x-dc sc-if{display:none}
     .rev-cb{display:none}
     .rev-toggle{display:none}
@@ -332,7 +332,7 @@
         <a href="#reviews" style="color:#6b6963;text-decoration:none" data-hv="0">Отзывы</a>
         <a href="#faq" style="color:#6b6963;text-decoration:none" data-hv="0">Вопросы</a>
       </div>
-      <a href="#contact" style="background:#1c1b19;color:#f2f1ee;text-decoration:none;font-size:13px;font-weight:600;padding:9px 18px;border-radius:999px;white-space:nowrap" data-hv="1">Записаться</a>
+      <a href="#contact" style="background:#1c1b19;color:#f2f1ee;text-decoration:none;font-size:13px;font-weight:600;padding:9px 18px;border-radius:999px;white-space:nowrap;flex-shrink:0" data-hv="1">Записаться</a>
     </nav>
   </div>
 
