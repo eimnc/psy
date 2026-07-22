@@ -15,10 +15,12 @@
 <meta name="twitter:title" content="Константин Бояркин — психолог · КПТ">
 <meta name="twitter:description" content="Помогаю разобраться в том, что происходит, и вернуть устойчивость, энергию и интерес к жизни. Санкт-Петербург и онлайн.">
 <meta name="twitter:image" content="https://eimnc.github.io/psy/assets/og-preview.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%231c1b19'/%3E%3Ctext%20x='32'%20y='46'%20font-family='Georgia,%20serif'%20font-size='42'%20fill='%23f2f1ee'%20text-anchor='middle'%3E%26%23936;%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,300;1,7..72,400&amp;family=Onest:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-300-cyrillic.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-i400-cyrillic.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-400-cyrillic.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-600-cyrillic.woff2" crossorigin>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -205,7 +207,7 @@
       [data-review-long]{order:-1 !important}
       [data-reviews-grid] figure{flex:0 0 80vw !important;scroll-snap-align:start !important;scroll-snap-stop:always !important;margin:0 !important}
       [data-rev-text]{display:-webkit-box !important;-webkit-line-clamp:6 !important;line-clamp:6 !important;-webkit-box-orient:vertical !important;overflow:hidden !important}
-      .rev-cb:checked ~ [data-rev-text]{-webkit-line-clamp:unset !important;line-clamp:unset !important;overflow:visible !important}
+      .rev-cb:checked ~ [data-rev-text]{display:block !important;-webkit-line-clamp:unset !important;line-clamp:unset !important;overflow:visible !important}
       .rev-toggle{display:inline-block !important;margin-top:14px !important;font-size:13.5px !important;font-weight:600 !important;color:#1c1b19 !important;border-bottom:1px solid rgba(28,27,25,0.3);cursor:pointer;-webkit-tap-highlight-color:transparent}
       .rev-toggle::after{content:"Читать полностью"}
       .rev-cb:checked ~ .rev-toggle::after{content:"Свернуть"}
@@ -997,7 +999,7 @@
   function updLb(){var g=GAL[lbI];var im=q('[data-lb-img]');im.src=g.src;im.alt=g.t;q('[data-lb-t]').textContent=g.t;q('[data-lb-s]').textContent=g.s;q('[data-lb-c]').textContent=(lbI+1)+' / '+GAL.length;}
   function openLb(n){lastLb=document.activeElement;lbI=n;updLb();ovLb.style.display='flex';lock();focusSel('[data-lb-close]');}
   function closeLb(){lbI=null;ovLb.style.display='none';lock();back(lastLb);lastLb=null;}
-  function openMap(n){lastMap=document.activeElement;mapI=n;var p=PLACES[n];q('[data-map-kind]').textContent=p.kind;q('[data-map-addr]').textContent=p.addr;q('[data-map-metro]').textContent=p.metro;q('[data-map-iframe]').src='https://yandex.ru/map-widget/v1/?um=constructor%3A'+p.um+'&ll='+p.ll+'&z=17';q('[data-map-link]').href='https://yandex.ru/maps/?text='+encodeURIComponent(p.q);ovMap.style.display='flex';lock();focusSel('[data-map-close]');}
+  function openMap(n){lastMap=document.activeElement;mapI=n;var p=PLACES[n];q('[data-map-kind]').textContent=p.kind;q('[data-map-addr]').textContent=p.addr;q('[data-map-metro]').textContent=p.metro;q('[data-map-iframe]').src=window.matchMedia('(max-width:760px)').matches?'https://yandex.ru/map-widget/v1/?ll='+p.ll+'&z=17&mode=whatshere&whatshere%5Bpoint%5D='+p.ll+'&whatshere%5Bzoom%5D=17':'https://yandex.ru/map-widget/v1/?um=constructor%3A'+p.um+'&ll='+p.ll+'&z=17';q('[data-map-link]').href='https://yandex.ru/maps/?text='+encodeURIComponent(p.q);ovMap.style.display='flex';lock();focusSel('[data-map-close]');}
   function closeMap(){mapI=null;ovMap.style.display='none';q('[data-map-iframe]').src='about:blank';lock();back(lastMap);lastMap=null;}
   function openAppr(){lastAppr=document.activeElement;apprOn=true;ovAppr.style.display='flex';lock();focusSel('[data-appr-close]');requestAnimationFrame(function(){requestAnimationFrame(function(){if(window.__smerInit)window.__smerInit();});});}
   function closeAppr(){if(window.__smerStop)window.__smerStop();apprOn=false;ovAppr.style.display='none';lock();back(lastAppr);lastAppr=null;}
@@ -1083,6 +1085,8 @@
     Array.prototype.forEach.call(texts, function(t){
       var label = t.parentElement.querySelector('.rev-toggle');
       if (!label) return;
+      var cbEl = t.parentElement.querySelector('.rev-cb');
+      if (cbEl && cbEl.checked) { label.removeAttribute('data-rev-fits'); return; }
       var clamped = getComputedStyle(t).webkitLineClamp;
       var isClamping = clamped && clamped !== 'none';
       if (isClamping && t.scrollHeight > t.clientHeight + 2) label.removeAttribute('data-rev-fits');
@@ -1559,7 +1563,7 @@
         const sy = window.pageYOffset, vw = document.documentElement.clientWidth;
         if (p.kind === 'line') { p.x1 = 14; p.x2 = vw - 14; p.y = r.top + sy; }
         else { p.x1 = r.left + p.inset; p.x2 = r.right - p.inset; p.y = r.top + sy; }
-        if (C.mode !== 'jump') { C.x = clamp(C.x, p.x1, p.x2); C.y = p.y; place(); }
+        if (C.mode === 'walk') { C.y = p.y; place(); } else if (C.mode !== 'jump') { C.x = clamp(C.x, p.x1, p.x2); C.y = p.y; place(); }
       };
 
       // --- движение ---
@@ -1637,7 +1641,7 @@
         if (!p) { hide(); scheduleAppear(rnd(minDelay, maxDelay)); return; }
         const exitX = (C.x - p.x1 < p.x2 - C.x) ? p.x1 : p.x2;
         if (p.kind === 'line') {
-          walkTo(exitX, speed, () => { el.style.opacity = '0'; wait(430, () => { hide(); scheduleAppear(rnd(minDelay, maxDelay)); }); });
+          walkTo(exitX === p.x1 ? -70 : document.documentElement.clientWidth + 70, speed, () => { hide(); scheduleAppear(rnd(minDelay, maxDelay)); });
         } else {
           // с карточки/кнопки — соскакивает вбок (плоская дуга, не «вниз с обрыва»)
           walkTo(exitX, speed, () => {
