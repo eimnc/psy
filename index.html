@@ -196,6 +196,7 @@
       [data-reviews-scroll]::-webkit-scrollbar-track{background:transparent}
       [data-reviews-scroll]::-webkit-scrollbar-thumb{background:transparent;border-radius:3px}
       [data-reviews-scroll]:hover::-webkit-scrollbar-thumb,[data-reviews-scroll]:focus-within::-webkit-scrollbar-thumb{background:#c9c6be}
+      [data-reviews-scroll][data-sb="classic"]{padding-right:4px}
     }
     @media (max-width:820px){
       #help{background-image:none !important;clip-path:inset(0 0 0 0);isolation:isolate}
@@ -1122,6 +1123,9 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(runMark);
   var scroll = document.querySelector('[data-reviews-scroll]');
   var dotsWrap = document.querySelector('[data-reviews-dots]');
+  var sbSync = function(){ if (!scroll) return; if (scroll.offsetWidth - scroll.clientWidth > 0) scroll.setAttribute('data-sb', 'classic'); else scroll.removeAttribute('data-sb'); };
+  sbSync();
+  window.addEventListener('resize', sbSync);
   var getCards = function(){
     return Array.prototype.slice.call(document.querySelectorAll('[data-reviews-grid] figure')).sort(function(a,b){ return a.offsetLeft - b.offsetLeft; });
   };
