@@ -124,6 +124,32 @@
     body{margin:0;background:#f2f1ee;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-synthesis:weight}
     *{box-sizing:border-box}
     a,button,summary,label,[role="button"],[tabindex]{-webkit-tap-highlight-color:transparent}
+    /* ===== отклик на нажатие (вместо браузерной подсветки) ===== */
+    nav a[href="#contact"]:active,
+    [data-hero-cta] a[href="#contact"]:active,
+    #contact a[href^="https://t.me/"]:active,
+    #contact a[href^="tel:"]:active,
+    #formats button[aria-label^="Показать"]:active,
+    #education figure:active,
+    details.faq summary:active,
+    [data-lb-prev]:active,[data-lb-next]:active,[data-lb-close]:active,
+    [data-map-close]:active,[data-appr-close]:active,[data-cert-close]:active{transform:scale(0.978);transition:transform 90ms ease}
+    nav a[href="#contact"]:active,
+    [data-hero-cta] a[href="#contact"]:active,
+    #contact a[href^="https://t.me/"]:active{background:#454440 !important}
+    #contact a[href^="tel:"]:active,
+    [data-map-close]:active,[data-appr-close]:active,[data-cert-close]:active{border-color:#1c1b19 !important}
+    #formats button[aria-label^="Показать"]:active,
+    #education figure:active{background:#f2f1ee !important}
+    [data-hero-cta] a[href^="https://t.me/"]:active,
+    footer a:active,
+    [data-map-link]:active,
+    .appr-link:active .appr-link-t,
+    .cert-link:active .cert-link-t,
+    [data-s-seg]:active{opacity:0.55;transition:opacity 90ms ease}
+    @media (prefers-reduced-motion:reduce){
+      nav a[href="#contact"]:active,[data-hero-cta] a[href="#contact"]:active,#contact a[href^="https://t.me/"]:active,#contact a[href^="tel:"]:active,#formats button[aria-label^="Показать"]:active,#education figure:active,details.faq summary:active,[data-lb-prev]:active,[data-lb-next]:active,[data-lb-close]:active,[data-map-close]:active,[data-appr-close]:active,[data-cert-close]:active{transform:none}
+    }
     @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
     [data-reveal],[data-reveal-list]>*{will-change:opacity,transform}
     @media (prefers-reduced-motion:reduce){[data-reveal],[data-reveal-list]>*{opacity:1 !important;transform:none !important}#help [data-help-bg]{position:absolute !important}}
