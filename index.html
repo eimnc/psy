@@ -266,6 +266,8 @@
       #help [data-reveal-list]>*:nth-child(14){order:14}
     }
     /* ===== «О подходе»: модалка + модель СМЭР ===== */
+    .cert-link:hover .cert-link-t{border-bottom-color:#1c1b19}
+    [data-hv="cert-close"]:hover{border-color:#1c1b19 !important}
     .appr-link:hover .appr-link-t{border-bottom-color:#1c1b19}
     .appr-link:hover [data-appr-arrow]{transform:translateX(4px)}
     @keyframes apprFade{from{opacity:0}}
@@ -309,13 +311,16 @@
       [data-appr-backdrop]{padding:0 !important}
       [data-appr-sheet]{border-radius:0 !important;height:100dvh !important;max-height:none !important}
       [data-appr-body]{padding:40px 20px 72px !important}
+      [data-cert-backdrop]{padding:0 !important}
+      [data-cert-sheet]{border-radius:0 !important;max-height:none !important;height:100dvh !important}
+      [data-cert-body]{padding:20px 16px 60px !important}
       [data-smer]{padding-right:22px !important}
       [data-s-grid]{grid-template-columns:1fr !important;gap:44px !important}
       [data-s-seg]{padding:8px 12px !important;font-size:13px !important;gap:6px !important}
       [data-s-th]{padding:20px 22px !important}
     }
     @media (prefers-reduced-motion:reduce){
-      [data-appr-backdrop],[data-appr-sheet],.appr-st{animation:none !important}
+      [data-appr-backdrop],[data-appr-sheet],.appr-st,[data-cert-backdrop]{animation:none !important}
       [data-smer],[data-smer] [data-s-th],[data-smer] [data-s-card],[data-smer] [data-s-pulse]{animation:none !important}
       [data-s-thumb]{transition:none !important}
       [data-s-svg] circle{display:none !important}
@@ -339,6 +344,9 @@
 [data-hv="6"]:hover{transform:translateY(-6px) !important;border-color:#1c1b19 !important}
 [data-hv="7"]:hover{border-color:#1c1b19 !important}
 [data-hv="8"]:hover{background:rgba(250,249,247,0.25) !important}
+</style>
+<style>
+@media (min-width:1580px){ [data-gal-row]>div{flex:1 0 0px !important;width:0 !important} }
 </style>
 </head>
 <body>
@@ -499,13 +507,13 @@
             </div>
             <div style="font-family:'Literata',serif;font-size:22px;color:#1c1b19;white-space:nowrap">4 350 ₽</div>
           </div>
-          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-top:1px solid #dddbd5;border-bottom:1px solid #dddbd5">
+          <button data-open-cert="1" class="cert-link" aria-haspopup="dialog" aria-label="Подарочный сертификат — можно подарить сессию близкому человеку, цена по запросу. Посмотреть пример" style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;width:100%;padding:22px 0;background:none;border:none;border-top:1px solid #dddbd5;border-bottom:1px solid #dddbd5;text-align:left;font-family:inherit;cursor:pointer">
             <div>
-              <div style="font-size:16px;font-weight:600;color:#1c1b19">Подарочный сертификат</div>
+              <div style="font-size:16px;font-weight:600;color:#1c1b19"><span class="cert-link-t" style="border-bottom:1px solid rgba(28,27,25,0.3);padding-bottom:2px;transition:border-color 0.25s ease">Подарочный сертификат</span></div>
               <div style="margin-top:5px;font-size:13.5px;color:#94918a">можно подарить сессию близкому человеку</div>
             </div>
             <div style="font-family:'Literata',serif;font-style:italic;font-size:17px;color:#6b6963;white-space:nowrap">по запросу</div>
-          </div>
+          </button>
         </div>
         <!-- places -->
         <div style="display:flex;flex-direction:column;gap:14px">
@@ -533,15 +541,15 @@
 
   <!-- ================= EDUCATION ================= -->
   <section id="education" data-screen-label="Образование" style="padding:100px 0;background:#faf9f7;border-top:1px solid #e2e0db;border-bottom:1px solid #e2e0db;scroll-margin-top:70px">
-    <div style="max-width:1140px;margin:0 auto;padding:0 24px">
+    <div style="max-width:1188px;margin:0 auto;padding:0 24px">
       <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a">04 — Образование</p>
       <div style="margin-top:44px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
         <h2 style="margin:0;font-family:'Literata',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#1c1b19">Дипломы и награды</h2>
         <p style="margin:0;max-width:380px;font-size:14.5px;line-height:1.6;color:#94918a">Нажмите на документ, чтобы рассмотреть его ближе.</p>
       </div>
     </div>
-    <div style="margin-top:48px;display:flex;gap:16px;overflow-x:auto;padding:8px 24px 24px;scrollbar-width:thin">
-      <div style="flex:none;width:max(calc((100vw - 1140px) / 2 - 24px), 0px)"></div>
+    <div data-gal-row="true" style="margin-top:48px;display:flex;gap:16px;overflow-x:auto;padding:8px 24px 24px;scrollbar-width:thin">
+      <div style="flex:none;width:max(calc((100vw - 1188px) / 2 - 24px), 0px)"></div>
       <figure data-lb-open="0" tabindex="0" role="button" aria-label="Открыть: Бакалавриат — диплом с отличием" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
         <img src="assets/opt/g-bachelor-left.jpg" alt="Диплом бакалавра с отличием" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
         <figcaption style="padding:13px 6px 6px">
@@ -584,7 +592,7 @@
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">СберЗдоровье</div>
         </figcaption>
       </figure>
-      <div style="flex:none;width:max(calc((100vw - 1140px) / 2 - 24px), 12px)"></div>
+      <div style="flex:none;width:max(calc((100vw - 1188px) / 2 - 24px), 12px)"></div>
     </div>
   </section>
 
@@ -833,6 +841,59 @@
     </div>
   
 
+  <!-- ================= CERT MODAL («Подарочный сертификат») ================= -->
+  <div data-ov="cert" data-cert-backdrop="true" role="dialog" aria-modal="true" aria-label="Подарочный сертификат" style="display:none;position:fixed;inset:0;z-index:330;background:rgba(28,27,25,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);align-items:center;justify-content:center;padding:20px;animation:apprFade 0.3s ease both">
+    <div data-cert-sheet="true" style="background:#faf9f7;border-radius:20px;max-width:640px;width:100%;max-height:min(92vh,1020px);box-shadow:0 40px 120px rgba(0,0,0,0.35);cursor:default;display:flex;flex-direction:column;overflow:hidden">
+      <div style="flex:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 26px;border-bottom:1px solid #e7e5df">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a">Подарочный сертификат</div>
+        <button data-cert-close="true" data-hv="cert-close" style="flex:none;height:38px;padding:0 18px;border-radius:999px;border:1px solid #c6c3bc;background:none;color:#1c1b19;font-size:13.5px;cursor:pointer;font-family:inherit">Закрыть</button>
+      </div>
+      <div data-cert-body="true" style="flex:1 1 auto;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:24px 28px 40px;background:#e8e6e1">
+        <p style="margin:0 0 24px;font-size:14.5px;line-height:1.65;color:#54524c;text-wrap:pretty">Это пример. Сертификат можно оформить на любое количество сессий — как онлайн, так и очно в Санкт-Петербурге.</p>
+        <div data-cert-wrap="true" style="width:100%;display:flex;justify-content:center">
+          <div data-cert-box="true" style="flex:none;width:540px;height:810px;background:#f2f1ee;box-shadow:0 18px 50px rgba(28,27,25,0.14);padding:16px;transform-origin:top center;font-family:'Onest',sans-serif">
+            <div style="width:100%;height:100%;border:1px solid #d5d2ca;border-radius:20px;padding:44px 44px 38px;display:flex;flex-direction:column;align-items:center">
+              <div style="width:46px;height:46px;border-radius:50%;background:#1c1b19;display:grid;place-items:center;font-family:Georgia,'Times New Roman',serif;font-size:23px;color:#f2f1ee;line-height:1">Ψ</div>
+              <p style="margin:20px 0 0;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a;text-align:center">Константин Бояркин · психолог · КПТ</p>
+              <div style="margin:30px 0 0;font-family:'Literata',serif;font-weight:300;font-size:46px;line-height:1.12;letter-spacing:-0.015em;color:#1c1b19;text-align:center">Подарочный<br><em style="font-weight:400">сертификат</em></div>
+              <p style="margin:20px 0 0;font-size:15px;color:#54524c;text-align:center">одна онлайн-консультация · 1 час</p>
+              <p style="margin:6px 0 0;font-size:13px;color:#94918a;text-align:center">аудио- или видеосвязь, из любой точки мира</p>
+              <div style="flex:1 1 auto"></div>
+              <div style="width:100%;display:flex;flex-direction:column;gap:26px">
+                <div style="display:flex;align-items:baseline;gap:14px">
+                  <span style="flex:none;font-size:13px;color:#94918a">Кому</span>
+                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px"> </span>
+                </div>
+                <div style="display:flex;align-items:baseline;gap:14px">
+                  <span style="flex:none;font-size:13px;color:#94918a">От кого</span>
+                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px"> </span>
+                </div>
+                <div style="display:flex;align-items:baseline;gap:14px">
+                  <span style="flex:none;font-size:13px;color:#94918a">Сертификат №</span>
+                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px">001</span>
+                </div>
+                <div style="display:flex;align-items:baseline;gap:14px">
+                  <span style="flex:none;font-size:13px;color:#94918a">Действителен до</span>
+                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px"> </span>
+                </div>
+              </div>
+              <div style="flex:1 1 auto"></div>
+              <div style="width:100%;border-top:1px solid #dddbd5;padding-top:26px;display:flex;align-items:center;gap:20px">
+                <img src="assets/qr-site.png" alt="QR — сайт" style="flex:none;width:88px;height:88px;border:1px solid #e2e0db;border-radius:12px;background:#fff">
+                <div style="flex:1 1 auto">
+                  <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#94918a">Запись и вопросы</div>
+                  <div style="margin-top:8px;font-size:15px;font-weight:600;color:#1c1b19">t.me/eimnc</div>
+                  <div style="margin-top:4px;font-size:13.5px;color:#54524c">+7 996 799-08-44</div>
+                  <div style="margin-top:4px;font-size:12.5px;color:#94918a">eimnc.github.io/psy</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= APPROACH MODAL («О подходе») ================= -->
   
     <div data-ov="appr" data-appr-backdrop="true" role="dialog" aria-modal="true" aria-label="О подходе" style="display:none;position:fixed;inset:0;z-index:340;background:rgba(28,27,25,0.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:28px;animation:apprFade 0.3s ease both">
@@ -1008,17 +1069,17 @@
 
 <script>
 (function(){
-  var GAL=[{src:'assets/opt/g-bachelor.jpg',t:'Бакалавриат — диплом с отличием',s:'Психология · 2017'},{src:'assets/opt/g-master-ru.jpg',t:'Магистратура — диплом с отличием',s:'Социальная и политическая психология · 2019'},{src:'assets/opt/g-master-en.jpg',t:'Магистратура — англоязычный диплом',s:'СПбГУ · 2019'},{src:'assets/opt/g-phd-ru.jpg',t:'Аспирантура',s:'Психология · 2023'},{src:'assets/opt/g-phd-en.jpg',t:'Аспирантура — англоязычный диплом',s:'СПбГУ · 2023'},{src:'assets/opt/g-award.jpg',t:'Премия «Хороший доктор 2023»',s:'СберЗдоровье'}];
+  var GAL=[{src:'assets/opt/g-bachelor.jpg',t:'Бакалавриат — диплом с отличием',s:'Психология · 2017'},{src:'assets/opt/g-master-ru.jpg',t:'Магистратура — диплом с отличием',s:'Социальная и политическая психология · 2019'},{src:'assets/opt/g-master-en.jpg',t:'Магистратура — англоязычный диплом',s:'СПбГУ · 2019'},{src:'assets/opt/g-phd-ru.jpg',t:'Аспирантура',s:'Психология · 2023'},{src:'assets/opt/g-phd-en.jpg',t:'Аспирантура (англ.)',s:'СПбГУ · 2023'},{src:'assets/opt/g-award.jpg',t:'Премия «Хороший доктор 2023»',s:'СберЗдоровье'}];
   var PLACES=[{kind:'Очно · Центр',addr:'наб. канала Грибоедова, 10',metro:'1 минута от метро «Невский проспект»',q:'Санкт-Петербург, набережная канала Грибоедова, 10',ll:'30.327510,59.936449',um:'f1b2fe706546428494e2bc5542f1566b53ed28f83cb0b290455e1f9dc6a99ca5'},{kind:'Очно · Приморский район',addr:'ул. Уточкина, 3, корп. 3',metro:'5 минут от метро «Комендантский проспект»',q:'Санкт-Петербург, улица Уточкина, 3, корпус 3',ll:'30.264430,60.010270',um:'bbe0a5159c5a69ba382291cba16a844489fa078d5103fb6b1231a58d3464ecb5'}];
   var q=function(s){return document.querySelector(s);};
-  var ovLb=q('[data-ov="lb"]'),ovMap=q('[data-ov="map"]'),ovAppr=q('[data-ov="appr"]');
+  var ovLb=q('[data-ov="lb"]'),ovMap=q('[data-ov="map"]'),ovAppr=q('[data-ov="appr"]'),ovCert=q('[data-ov="cert"]');
   var kbd=false;
   window.addEventListener('keydown',function(){kbd=true;},true);
   window.addEventListener('pointerdown',function(){kbd=false;},true);
   window.addEventListener('touchstart',function(){kbd=false;},true);
   window.addEventListener('mousedown',function(){kbd=false;},true);
-  var lbI=null,mapI=null,apprOn=false,lastLb=null,lastMap=null,lastAppr=null;
-  function lock(){document.body.style.overflow=(lbI!==null||mapI!==null||apprOn)?'hidden':'';}
+  var lbI=null,mapI=null,apprOn=false,certOn=false,lastLb=null,lastMap=null,lastAppr=null,lastCert=null;
+  function lock(){document.body.style.overflow=(lbI!==null||mapI!==null||apprOn||certOn)?'hidden':'';}
   function focusSel(sel){if(!kbd)return;requestAnimationFrame(function(){var n=q(sel);if(n&&n.focus)n.focus();});}
   function back(n){if(kbd&&n&&n.focus)n.focus();}
   function updLb(){var g=GAL[lbI];var im=q('[data-lb-img]');im.src=g.src;im.alt=g.t;q('[data-lb-t]').textContent=g.t;q('[data-lb-s]').textContent=g.s;q('[data-lb-c]').textContent=(lbI+1)+' / '+GAL.length;}
@@ -1028,6 +1089,10 @@
   function closeMap(){mapI=null;ovMap.style.display='none';q('[data-map-iframe]').src='about:blank';lock();back(lastMap);lastMap=null;}
   function openAppr(){lastAppr=document.activeElement;apprOn=true;ovAppr.style.display='flex';lock();focusSel('[data-appr-close]');requestAnimationFrame(function(){requestAnimationFrame(function(){if(window.__smerInit)window.__smerInit();});});}
   function closeAppr(){if(window.__smerStop)window.__smerStop();apprOn=false;ovAppr.style.display='none';lock();back(lastAppr);lastAppr=null;}
+  function certFit(){var w=q('[data-cert-wrap]');if(!w)return;var b=w.querySelector('[data-cert-box]');var k=Math.min(1,w.clientWidth/540);b.style.transform='scale('+k+')';w.style.height=Math.round(810*k)+'px';}
+  function openCert(){lastCert=document.activeElement;certOn=true;ovCert.style.display='flex';lock();focusSel('[data-cert-close]');requestAnimationFrame(function(){requestAnimationFrame(certFit);});}
+  function closeCert(){certOn=false;ovCert.style.display='none';lock();back(lastCert);lastCert=null;}
+  window.addEventListener('resize',function(){if(certOn)certFit();});
   document.addEventListener('click',function(e){
     var t=e.target;
     if(!t.closest){return;}
@@ -1035,19 +1100,35 @@
     if(fig){openLb(+fig.getAttribute('data-lb-open'));return;}
     var mb=t.closest('[data-open-map]');
     if(mb){openMap(+mb.getAttribute('data-open-map'));return;}
+    if(t.closest('[data-open-cert]')){openCert();return;}
     if(t.closest('[data-open-appr]')){openAppr();return;}
     if(t.closest('[data-lb-prev]')){lbI=(lbI+GAL.length-1)%GAL.length;updLb();return;}
     if(t.closest('[data-lb-next]')){lbI=(lbI+1)%GAL.length;updLb();return;}
     if(t.closest('[data-lb-close]')){closeLb();return;}
     if(t.closest('[data-map-close]')){closeMap();return;}
     if(t.closest('[data-appr-close]')){closeAppr();return;}
+    if(t.closest('[data-cert-close]')){closeCert();return;}
     if(t===ovLb){closeLb();return;}
     if(t===ovMap){closeMap();return;}
     if(t===ovAppr){closeAppr();return;}
+    if(t===ovCert){closeCert();return;}
   });
+  function trapTab(e){
+    var dlg=null;var all=document.querySelectorAll('[role="dialog"]');
+    for(var i=0;i<all.length;i++){if(getComputedStyle(all[i]).display!=='none'){dlg=all[i];break;}}
+    if(!dlg)return;
+    var f=[].slice.call(dlg.querySelectorAll('a[href],button:not([disabled]),iframe,input,select,textarea,[tabindex]:not([tabindex="-1"])')).filter(function(n){var r=n.getBoundingClientRect();return r.width>0||r.height>0;});
+    if(!f.length)return;
+    var first=f[0],last=f[f.length-1],cur=document.activeElement;
+    if(!dlg.contains(cur)){e.preventDefault();(e.shiftKey?last:first).focus();return;}
+    if(!e.shiftKey&&cur===last){e.preventDefault();first.focus();}
+    else if(e.shiftKey&&cur===first){e.preventDefault();last.focus();}
+  }
   document.addEventListener('keydown',function(e){
     var t=e.target;
+    if(e.key==='Tab'&&(lbI!==null||mapI!==null||apprOn||certOn)){trapTab(e);return;}
     if((e.key==='Enter'||e.key===' ')&&t.closest&&t.closest('[data-lb-open]')){e.preventDefault();openLb(+t.closest('[data-lb-open]').getAttribute('data-lb-open'));return;}
+    if(e.key==='Escape'&&certOn){closeCert();return;}
     if(e.key==='Escape'&&apprOn){closeAppr();return;}
     if(e.key==='Escape'&&mapI!==null){closeMap();return;}
     if(lbI===null)return;
