@@ -1112,7 +1112,14 @@
   function lock(){document.body.style.overflow=(lbI!==null||mapI!==null||apprOn||certOn)?'hidden':'';}
   function focusSel(sel){if(!kbd)return;requestAnimationFrame(function(){var n=q(sel);if(n&&n.focus)n.focus();});}
   function back(n){if(kbd&&n&&n.focus)n.focus();}
-  function updLb(){var g=GAL[lbI];var im=q('[data-lb-img]');im.src=g.src;im.alt=g.t;q('[data-lb-t]').textContent=g.t;q('[data-lb-s]').textContent=g.s;q('[data-lb-c]').textContent=(lbI+1)+' / '+GAL.length;}
+  var FULL={};
+  function pfFull(i){var n=GAL.length;[i,(i+1)%n,(i+n-1)%n].forEach(function(k){var s=GAL[k].src;if(FULL[s])return;var im=new Image();im.decoding='async';FULL[s]=im;im.src=s;});}
+  var fullWarmed=false;
+  function warmFull(){if(fullWarmed)return;fullWarmed=true;var k=0;(function nx(){while(k<GAL.length&&FULL[GAL[k].src])k++;if(k>=GAL.length)return;var s=GAL[k++].src;var im=new Image();if('fetchPriority' in im)im.fetchPriority='low';im.decoding='async';im.onload=im.onerror=nx;FULL[s]=im;im.src=s;})();}
+  (function(){var ed=document.getElementById('education');
+    if(ed&&window.IntersectionObserver){var io=new IntersectionObserver(function(es){for(var i=0;i<es.length;i++)if(es[i].isIntersecting){io.disconnect();warmFull();return;}},{rootMargin:'900px 0px'});io.observe(ed);}
+    else setTimeout(warmFull,3000);})();
+  function updLb(){pfFull(lbI);var g=GAL[lbI];var im=q('[data-lb-img]');im.src=g.src;im.alt=g.t;q('[data-lb-t]').textContent=g.t;q('[data-lb-s]').textContent=g.s;q('[data-lb-c]').textContent=(lbI+1)+' / '+GAL.length;}
   function openLb(n){lastLb=document.activeElement;lbI=n;updLb();ovLb.style.display='flex';lock();focusSel('[data-lb-close]');}
   function closeLb(){lbI=null;ovLb.style.display='none';lock();back(lastLb);lastLb=null;}
   function openMap(n){lastMap=document.activeElement;mapI=n;var p=PLACES[n];q('[data-map-kind]').textContent=p.kind;q('[data-map-addr]').textContent=p.addr;q('[data-map-metro]').textContent=p.metro;q('[data-map-iframe]').src=window.matchMedia('(max-width:760px)').matches?'https://yandex.ru/map-widget/v1/?ll='+p.ll+'&z=17&mode=whatshere&whatshere%5Bpoint%5D='+p.ll+'&whatshere%5Bzoom%5D=17':'https://yandex.ru/map-widget/v1/?um=constructor%3A'+p.um+'&ll='+p.ll+'&z=17';q('[data-map-link]').href='https://yandex.ru/maps/?text='+encodeURIComponent(p.q);ovMap.style.display='flex';lock();focusSel('[data-map-close]');}
