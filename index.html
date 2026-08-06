@@ -152,9 +152,9 @@
     @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
     [data-reveal],[data-reveal-list]>*{will-change:opacity,transform}
     @media (prefers-reduced-motion:reduce){[data-reveal],[data-reveal-list]>*{opacity:1 !important;transform:none !important}#help [data-help-bg]{position:absolute !important}}
-    body.hero-in [data-hero-head]{animation:fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both}
-    body.hero-in [data-hero-photo]{animation:fadeUp 1.1s cubic-bezier(0.22,1,0.36,1) both}
-    body.hero-in [data-hero-body]{animation:fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both}
+    html.hero-in [data-hero-head]{animation:fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both}
+    html.hero-in [data-hero-photo]{animation:fadeUp 1.1s cubic-bezier(0.22,1,0.36,1) both}
+    html.hero-in [data-hero-body]{animation:fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both}
     ::selection{background:rgba(28,27,25,0.12)}
     input::placeholder,textarea::placeholder{color:#a3a09a}
     img{user-select:none}
@@ -356,11 +356,11 @@
     }
   </style>
   <script>
-    (function(){
-      function go(){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('hero-in'); }); }); }
-      if (document.readyState === 'complete') go();
-      else window.addEventListener('load', go);
-    })();
+    /* Класс ставим синхронно, ДО разбора героя: первая же отрисовка героя = кадр 0
+       анимации, поэтому текст не «вспыхивает» повторно. Раньше класс вешался на
+       window.load — на медленной сети герой был виден с ~2 с, затем гас и
+       проявлялся заново в момент полной загрузки. */
+    document.documentElement.classList.add('hero-in');
   </script>
 <style>
 @media (hover:hover) and (pointer:fine){
@@ -398,6 +398,8 @@
       <a href="#contact" style="background:#1c1b19;color:#f2f1ee;text-decoration:none;font-size:13px;font-weight:600;padding:9px 18px;border-radius:999px;white-space:nowrap;flex-shrink:0" data-hv="1">Записаться</a>
     </nav>
   </div>
+
+  <main>
 
   <!-- ================= HERO ================= -->
   <section data-screen-label="Главный экран" data-hero="true" style="padding:140px 24px 70px">
@@ -581,42 +583,42 @@
     <div data-gal-row="true" style="margin-top:48px;display:flex;gap:16px;overflow-x:auto;padding:8px 24px 24px;scrollbar-width:thin">
       <div style="flex:none;width:max(calc((100vw - 1188px) / 2 - 24px), 0px)"></div>
       <figure data-lb-open="0" tabindex="0" role="button" aria-label="Открыть: Бакалавриат — диплом с отличием" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
-        <img src="assets/opt/g-bachelor-left.jpg" alt="Диплом бакалавра с отличием" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
+        <img src="assets/opt/g-bachelor-left.jpg" loading="lazy" decoding="async" alt="Диплом бакалавра с отличием" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
         <figcaption style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Бакалавриат — диплом с отличием</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">Психология · 2017</div>
         </figcaption>
       </figure>
       <figure data-lb-open="1" tabindex="0" role="button" aria-label="Открыть: Магистратура — диплом с отличием" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
-        <img src="assets/opt/g-master-ru.jpg" alt="Диплом магистра с отличием" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
+        <img src="assets/opt/g-master-ru.jpg" loading="lazy" decoding="async" alt="Диплом магистра с отличием" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
         <figcaption style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Магистратура — диплом с отличием</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">Социальная и политическая психология · 2019</div>
         </figcaption>
       </figure>
       <figure data-lb-open="2" tabindex="0" role="button" aria-label="Открыть: Магистратура — англоязычный диплом" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
-        <img src="assets/opt/g-master-en.jpg" alt="Диплом магистра — англоязычная версия" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
+        <img src="assets/opt/g-master-en.jpg" loading="lazy" decoding="async" alt="Диплом магистра — англоязычная версия" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
         <figcaption style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Магистратура — англоязычный диплом</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">СПбГУ · 2019</div>
         </figcaption>
       </figure>
       <figure data-lb-open="3" tabindex="0" role="button" aria-label="Открыть: Аспирантура" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
-        <img src="assets/opt/g-phd-ru.jpg" alt="Диплом об окончании аспирантуры СПбГУ" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
+        <img src="assets/opt/g-phd-ru.jpg" loading="lazy" decoding="async" alt="Диплом об окончании аспирантуры СПбГУ" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
         <figcaption style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Аспирантура</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">Психология · 2023</div>
         </figcaption>
       </figure>
       <figure data-lb-open="4" tabindex="0" role="button" aria-label="Открыть: Аспирантура — англоязычный диплом" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
-        <img src="assets/opt/g-phd-en.jpg" alt="Диплом аспирантуры — англоязычная версия" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
+        <img src="assets/opt/g-phd-en.jpg" loading="lazy" decoding="async" alt="Диплом аспирантуры — англоязычная версия" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
         <figcaption style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Аспирантура — англоязычный диплом</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">СПбГУ · 2023</div>
         </figcaption>
       </figure>
       <figure data-lb-open="5" tabindex="0" role="button" aria-label="Открыть: Премия «Хороший доктор 2023»" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #b8b5ae;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="6">
-        <img src="assets/opt/g-award.jpg" alt="Премия «Хороший доктор 2023»" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
+        <img src="assets/opt/g-award.jpg" loading="lazy" decoding="async" alt="Премия «Хороший доктор 2023»" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
         <figcaption style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Премия «Хороший доктор 2023»</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">СберЗдоровье</div>
@@ -820,6 +822,8 @@
       <p style="margin:30px 0 0;font-size:13.5px;color:#94918a">Конфиденциальность гарантирована</p>
     </div>
   </section>
+
+  </main>
 
   <!-- ================= FOOTER ================= -->
   <footer style="border-top:1px solid #e2e0db;padding:32px 24px 40px;background:#f2f1ee">
@@ -2011,6 +2015,28 @@
 
 
   catInit();
+})();
+</script>
+
+<script>
+/* (5) Тихая очередь дипломов: после полной загрузки страницы догружаем шесть карточек
+   ПО ОДНОЙ (следующая — по onload предыдущей), чтобы к доскроллу они были готовы, а
+   канал первого экрана не отнимался. Файл тот же, что в лайтбоксе → открытие мгновенное. */
+(function(){
+  function warm(){
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('#education img[loading="lazy"]'));
+    (function next(){
+      var img = imgs.shift();
+      if (!img) return;
+      if (img.complete) { next(); return; }
+      img.addEventListener('load', next, { once: true });
+      img.addEventListener('error', next, { once: true });
+      img.loading = 'eager';
+    })();
+  }
+  function start(){ setTimeout(warm, 500); }
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start, { once: true });
 })();
 </script>
 </body>
