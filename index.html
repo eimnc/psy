@@ -38,6 +38,17 @@
   @font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/onest-400.woff2') format('woff2')}
   @font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/onest-500.woff2') format('woff2')}
   @font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/onest-600.woff2') format('woff2')}
+  /* Метрики фолбэков. Пока грузятся Literata/Onest, системный шрифт занимает РОВНО столько
+     же места (size-adjust подгоняет ширину, ascent/descent-override — высоту строки), поэтому
+     в момент подмены ничего не переверстывается: уходит CLS и «елозание» строк при первой
+     загрузке. Порядок семейств: Noto Serif/Roboto (Android) → Georgia/Helvetica Neue (iOS,
+     macOS) → Times New Roman/Arial (Windows). Значения измерены по нашим файлам 09.08.2026. */
+  @font-face{font-family:'LitFbA';src:local('Noto Serif');size-adjust:94.3%;ascent-override:125.2%;descent-override:32.9%;line-gap-override:0%}
+  @font-face{font-family:'LitFbG';src:local('Georgia');size-adjust:102.6%;ascent-override:115.0%;descent-override:30.2%;line-gap-override:0%}
+  @font-face{font-family:'LitFbT';src:local('Times New Roman');size-adjust:112.9%;ascent-override:104.5%;descent-override:27.5%;line-gap-override:0%}
+  @font-face{font-family:'OneFbR';src:local('Roboto');size-adjust:100.9%;ascent-override:96.2%;descent-override:29.7%;line-gap-override:0%}
+  @font-face{font-family:'OneFbH';src:local('Helvetica Neue');size-adjust:99.7%;ascent-override:97.3%;descent-override:30.1%;line-gap-override:0%}
+  @font-face{font-family:'OneFbW';src:local('Arial');size-adjust:102.1%;ascent-override:95.0%;descent-override:29.4%;line-gap-override:0%}
   </style>
   <script type="application/ld+json">
   {
@@ -209,12 +220,12 @@
     @keyframes catPaw{from{transform:rotate(3deg)}to{transform:rotate(-3deg)}}
     [data-cat] .cat-breath{transform-box:fill-box;transform-origin:50% 100%;animation:catBreath 2.7s ease-in-out infinite alternate}
     @keyframes catBreath{from{transform:scale(1,1)}to{transform:scale(1.015,1.05)}}
-    [data-cat] .cat-z{stroke:none;fill:currentColor;font-family:'Literata',serif;font-style:italic;animation:catZ 2.4s ease-in-out infinite}
+    [data-cat] .cat-z{stroke:none;fill:currentColor;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-style:italic;animation:catZ 2.4s ease-in-out infinite}
     [data-cat] .cat-z.z2{animation-delay:-1.2s}
     @keyframes catZ{0%,100%{opacity:0}40%{opacity:0.9}}
     [data-cat] .cat-ex{animation:catEx 0.3s ease-out both}
     @keyframes catEx{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}
-    [data-cat-say]{position:absolute;left:50%;bottom:calc(100% + 5px);transform:translate(-50%,5px);font-family:'Literata',serif;font-style:italic;font-size:11.5px;color:#6b6963;opacity:0;transition:opacity 0.35s ease,transform 0.35s ease;white-space:nowrap;pointer-events:none}
+    [data-cat-say]{position:absolute;left:50%;bottom:calc(100% + 5px);transform:translate(-50%,5px);font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-style:italic;font-size:11.5px;color:#6b6963;opacity:0;transition:opacity 0.35s ease,transform 0.35s ease;white-space:nowrap;pointer-events:none}
     [data-cat][data-ink="light"] [data-cat-say]{color:rgba(242,241,238,0.9)}
     [data-cat].cat-say [data-cat-say]{opacity:1;transform:translate(-50%,0)}
     [data-cat] .eye-h{display:none}
@@ -394,12 +405,12 @@
 </style>
 </head>
 <body>
-<div id="top" style="position:relative;font-family:'Onest',-apple-system,'Helvetica Neue',sans-serif;background:#f2f1ee;color:#1c1b19;overflow-x:hidden">
+<div id="top" style="position:relative;font-family:'Onest','OneFbR','OneFbH','OneFbW',-apple-system,'Helvetica Neue',sans-serif;background:#f2f1ee;color:#1c1b19;overflow-x:hidden">
 
   <!-- ================= NAV ================= -->
   <div style="position:fixed;top:0;left:0;right:0;z-index:120;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(242,241,238,0.85);border-bottom:1px solid #e2e0db">
     <nav style="max-width:1140px;margin:0 auto;display:flex;align-items:center;gap:28px;height:62px;padding:0 24px">
-      <a href="#top" style="color:#1c1b19;text-decoration:none;font-family:'Literata',serif;font-weight:500;font-size:16.5px;white-space:nowrap">Константин Бояркин</a>
+      <a href="#top" style="color:#1c1b19;text-decoration:none;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:500;font-size:16.5px;white-space:nowrap">Константин Бояркин</a>
       <div style="flex:1"></div>
       <div data-hide-m="true" style="display:flex;align-items:center;gap:24px;font-size:13.5px">
         <a href="#about" style="color:#6b6963;text-decoration:none" data-hv="0">Обо мне</a>
@@ -420,11 +431,11 @@
     <div id="hero-grid" style="max-width:1140px;margin:0 auto;display:grid;gap:36px 64px;align-items:center">
       <div data-hero-head="true" style="grid-area:head">
         <p style="margin:0 0 24px;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a">Психолог · КПТ · Санкт-Петербург и онлайн</p>
-        <h1 style="margin:0;font-family:'Literata',serif;font-weight:300;font-size:clamp(40px,5.4vw,72px);line-height:1.1;letter-spacing:-0.015em;color:#1c1b19;text-wrap:balance">Тревога, апатия, навязчивые мысли — <em style="font-style:italic;font-weight:400">с этим можно работать</em>.</h1>
+        <h1 style="margin:0;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:clamp(40px,5.4vw,72px);line-height:1.1;letter-spacing:-0.015em;color:#1c1b19;text-wrap:balance">Тревога, апатия, навязчивые мысли — <em style="font-style:italic;font-weight:400">с этим можно работать</em>.</h1>
       </div>
       <div data-hero-photo="true" style="grid-area:photo;display:flex;justify-content:center">
         <div data-photo-wrap="true" style="position:relative;width:min(400px,80vw)">
-          <img src="assets/portrait.jpg" fetchpriority="high" alt="Константин Бояркин — психолог" style="display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:50%;border:1px solid #e2e0db;box-shadow:0 24px 60px rgba(28,27,25,0.10)">
+          <picture><source srcset="assets/portrait.webp" type="image/webp"><img src="assets/portrait.jpg" fetchpriority="high" alt="Константин Бояркин — психолог" style="display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:50%;border:1px solid #e2e0db;box-shadow:0 24px 60px rgba(28,27,25,0.10)"></picture>
         </div>
       </div>
       <div data-hero-body="true" style="grid-area:body">
@@ -444,7 +455,7 @@
         <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a">01 — Обо мне</p>
       </div>
       <div style="margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px 80px;align-items:baseline">
-        <h2 style="margin:0;font-family:'Literata',serif;font-weight:300;font-size:clamp(28px,3.6vw,44px);line-height:1.3;color:#1c1b19;text-wrap:pretty">Я работаю в когнитивно-поведенческом подходе: мы не просто говорим о проблеме, а разбираемся, <em style="font-style:italic">как она устроена — и что с ней делать</em>.</h2>
+        <h2 style="margin:0;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:clamp(28px,3.6vw,44px);line-height:1.3;color:#1c1b19;text-wrap:pretty">Я работаю в когнитивно-поведенческом подходе: мы не просто говорим о проблеме, а разбираемся, <em style="font-style:italic">как она устроена — и что с ней делать</em>.</h2>
         <div style="max-width:460px">
           <p style="margin:0;font-size:16px;line-height:1.75;color:#54524c;text-wrap:pretty">КПТ — один из самых исследованных методов психотерапии с доказанной эффективностью, рассчитанный на обозримое число встреч.</p>
           <p style="margin:18px 0 0;font-size:16px;line-height:1.75;color:#54524c;text-wrap:pretty">В основе КПТ — связь мыслей, эмоций и поведения: то, как мы интерпретируем происходящее, определяет, что мы чувствуем и делаем. На сессиях мы учимся замечать автоматические мысли, проверять их на соответствие реальности и постепенно менять привычные реакции — на уровне и мышления, и конкретных действий.</p>
@@ -456,27 +467,27 @@
       </div>
       <div data-reveal-list style="margin-top:80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 56px">
         <div style="border-top:1px solid #dddbd5;padding:30px 0 36px">
-          <div data-num="true" style="font-family:'Literata',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">3000<span style="font-family:'Onest',-apple-system,sans-serif;font-weight:400;font-size:0.66em;vertical-align:0.09em;margin-left:1px">+</span></div>
+          <div data-num="true" style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">3000<span style="font-family:'Onest','OneFbR','OneFbH','OneFbW',-apple-system,sans-serif;font-weight:400;font-size:0.66em;vertical-align:0.09em;margin-left:1px">+</span></div>
           <p style="margin:10px 0 0;font-size:14.5px;line-height:1.6;color:#6b6963">часов консультативной практики</p>
         </div>
         <div style="border-top:1px solid #dddbd5;padding:30px 0 36px">
-          <div data-num="true" style="font-family:'Literata',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">2 диплома</div>
+          <div data-num="true" style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">2 диплома</div>
           <p style="margin:10px 0 0;font-size:14.5px;line-height:1.6;color:#6b6963">с отличием по психологии</p>
         </div>
         <div style="border-top:1px solid #dddbd5;padding:30px 0 36px">
-          <div data-num="true" style="font-family:'Literata',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">СПбГУ</div>
+          <div data-num="true" style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">СПбГУ</div>
           <p style="margin:10px 0 0;font-size:14.5px;line-height:1.6;color:#6b6963">окончил аспирантуру Санкт-Петербургского государственного университета</p>
         </div>
         <div style="border-top:1px solid #dddbd5;padding:30px 0 36px">
-          <div data-num="true" style="font-family:'Literata',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">РАН · ВШЭ</div>
+          <div data-num="true" style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">РАН · ВШЭ</div>
           <p style="margin:10px 0 0;font-size:14.5px;line-height:1.6;color:#6b6963">автор научных публикаций в журналах Института психологии РАН и Высшей школы экономики</p>
         </div>
         <div style="border-top:1px solid #dddbd5;padding:30px 0 36px">
-          <div data-num="true" style="font-family:'Literata',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">2023</div>
+          <div data-num="true" style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">2023</div>
           <p style="margin:10px 0 0;font-size:14.5px;line-height:1.6;color:#6b6963">психолог года в Санкт-Петербурге — премия «Хороший доктор», СберЗдоровье</p>
         </div>
         <div style="border-top:1px solid #dddbd5;padding:30px 0 36px">
-          <div data-num="true" style="font-family:'Literata',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">Этика</div>
+          <div data-num="true" style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:40px;letter-spacing:-0.01em;color:#1c1b19">Этика</div>
           <p style="margin:10px 0 0;font-size:14.5px;line-height:1.6;color:#6b6963">регулярно прохожу личную терапию, супервизии и интервизии</p>
         </div>
       </div>
@@ -491,7 +502,7 @@
       <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.62)">02 — С чем я работаю</p>
       <div style="margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px 80px;align-items:start">
         <div data-reveal>
-          <h2 style="margin:0;font-family:'Literata',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#f7f6f3;text-wrap:balance">С чем можно ко мне обратиться</h2>
+          <h2 style="margin:0;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#f7f6f3;text-wrap:balance">С чем можно ко мне обратиться</h2>
           <p style="margin:24px 0 0;max-width:380px;font-size:15.5px;line-height:1.7;color:rgba(247,246,243,0.82);text-wrap:pretty">Если вы не нашли свой запрос в списке — <a href="#contact" style="color:#ffffff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.45)" data-hv="3">просто напишите</a>, и мы вместе поймём, смогу ли я быть полезен.</p>
         </div>
         <div data-reveal-list style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 44px">
@@ -518,7 +529,7 @@
   <section id="formats" data-screen-label="Форматы и стоимость" style="padding:110px 24px;scroll-margin-top:70px">
     <div style="max-width:1140px;margin:0 auto">
       <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a">03 — Форматы и стоимость</p>
-      <h2 style="margin:44px 0 0;font-family:'Literata',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#1c1b19;text-wrap:balance">Онлайн — из любой точки мира. Очно — в Петербурге.</h2>
+      <h2 style="margin:44px 0 0;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#1c1b19;text-wrap:balance">Онлайн — из любой точки мира. Очно — в Петербурге.</h2>
 
       <div style="margin-top:64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:64px 80px">
         <!-- price table -->
@@ -528,14 +539,14 @@
               <div style="font-size:16px;font-weight:600;color:#1c1b19">Онлайн-сессия · 1 час</div>
               <div style="margin-top:5px;font-size:13.5px;color:#94918a">аудио- или видеосвязь</div>
             </div>
-            <div style="font-family:'Literata',serif;font-size:22px;color:#1c1b19;white-space:nowrap">2 400 ₽</div>
+            <div style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:22px;color:#1c1b19;white-space:nowrap">2 400 ₽</div>
           </div>
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-top:1px solid #dddbd5">
             <div>
               <div style="font-size:16px;font-weight:600;color:#1c1b19">Очная сессия · 55 минут</div>
               <div style="margin-top:5px;font-size:13.5px;color:#94918a">встречи также возможны на 1,5 или 2 часа</div>
             </div>
-            <div style="font-family:'Literata',serif;font-size:22px;color:#1c1b19;white-space:nowrap">2 900 ₽</div>
+            <div style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:22px;color:#1c1b19;white-space:nowrap">2 900 ₽</div>
           </div>
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-top:1px solid #dddbd5">
             <div>
@@ -545,38 +556,38 @@
               </div>
               <div style="margin-top:5px;font-size:13.5px;color:#94918a">для тех, кто настроен на последовательную работу</div>
             </div>
-            <div style="font-family:'Literata',serif;font-size:22px;color:#1c1b19;white-space:nowrap">10 000 ₽</div>
+            <div style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:22px;color:#1c1b19;white-space:nowrap">10 000 ₽</div>
           </div>
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-top:1px solid #dddbd5">
             <div>
               <div style="font-size:16px;font-weight:600;color:#1c1b19">Парная консультация · 85 минут</div>
             </div>
-            <div style="font-family:'Literata',serif;font-size:22px;color:#1c1b19;white-space:nowrap">4 350 ₽</div>
+            <div style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:22px;color:#1c1b19;white-space:nowrap">4 350 ₽</div>
           </div>
           <button data-open-cert="1" class="cert-link" aria-haspopup="dialog" aria-label="Подарочный сертификат — можно подарить сессию близкому человеку, цена по запросу. Посмотреть пример" style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;width:100%;padding:22px 0;background:none;border:none;border-top:1px solid #dddbd5;border-bottom:1px solid #dddbd5;text-align:left;font-family:inherit;cursor:pointer">
             <div>
               <div style="font-size:16px;font-weight:600;color:#1c1b19"><span class="cert-link-t" style="border-bottom:1px solid rgba(28,27,25,0.3);padding-bottom:2px;transition:border-color 0.25s ease">Подарочный сертификат</span></div>
               <div style="margin-top:5px;font-size:13.5px;color:#94918a">можно подарить сессию близкому человеку</div>
             </div>
-            <div style="font-family:'Literata',serif;font-style:italic;font-size:17px;color:#6b6963;white-space:nowrap">по запросу</div>
+            <div style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-style:italic;font-size:17px;color:#6b6963;white-space:nowrap">по запросу</div>
           </button>
         </div>
         <!-- places -->
         <div style="display:flex;flex-direction:column;gap:14px">
           <div style="flex:1 1 auto;background:#faf9f7;border:1px solid #e2e0db;border-radius:20px;padding:28px 30px">
             <div style="font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#94918a">Онлайн</div>
-            <div data-fmt-title="true" style="margin-top:12px;font-family:'Literata',serif;font-size:21px;color:#1c1b19">Аудио- или видеосвязь</div>
+            <div data-fmt-title="true" style="margin-top:12px;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:21px;color:#1c1b19">Аудио- или видеосвязь</div>
             <div style="margin-top:6px;font-size:14px;color:#6b6963">из любой точки мира</div>
           </div>
           <button data-open-map="0" aria-label="Показать на карте: наб. канала Грибоедова, 10" style="flex:1 1 auto;text-align:left;font-family:inherit;display:block;width:100%;background:#faf9f7;border:1px solid #e2e0db;border-radius:20px;padding:28px 30px;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease" data-hv="4">
             <div style="font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#94918a">Очно · Центр</div>
-            <div data-fmt-title="true" style="margin-top:12px;font-family:'Literata',serif;font-size:21px;color:#1c1b19">наб. канала Грибоедова, 10</div>
+            <div data-fmt-title="true" style="margin-top:12px;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:21px;color:#1c1b19">наб. канала Грибоедова, 10</div>
             <div style="margin-top:6px;font-size:14px;color:#6b6963">1 минута от метро «Невский проспект»</div>
             <div style="margin-top:14px;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#1c1b19"><span style="border-bottom:1px solid rgba(28,27,25,0.3);padding-bottom:1px">Показать на карте</span><span aria-hidden="true">↗</span></div>
           </button>
           <button data-open-map="1" aria-label="Показать на карте: ул. Уточкина, 3, корп. 3" style="flex:1 1 auto;text-align:left;font-family:inherit;display:block;width:100%;background:#faf9f7;border:1px solid #e2e0db;border-radius:20px;padding:28px 30px;cursor:pointer;transition:border-color 0.3s ease,transform 0.3s ease" data-hv="4">
             <div style="font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#94918a">Очно · Приморский район</div>
-            <div data-fmt-title="true" style="margin-top:12px;font-family:'Literata',serif;font-size:21px;color:#1c1b19">ул. Уточкина, 3, корп. 3</div>
+            <div data-fmt-title="true" style="margin-top:12px;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:21px;color:#1c1b19">ул. Уточкина, 3, корп. 3</div>
             <div style="margin-top:6px;font-size:14px;color:#6b6963">5 минут от метро «Комендантский проспект»</div>
             <div style="margin-top:14px;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#1c1b19"><span style="border-bottom:1px solid rgba(28,27,25,0.3);padding-bottom:1px">Показать на карте</span><span aria-hidden="true">↗</span></div>
           </button>
@@ -590,7 +601,7 @@
     <div style="max-width:1188px;margin:0 auto;padding:0 24px">
       <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a">04 — Образование</p>
       <div style="margin-top:44px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
-        <h2 style="margin:0;font-family:'Literata',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#1c1b19">Дипломы и награды</h2>
+        <h2 style="margin:0;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#1c1b19">Дипломы и награды</h2>
         <p style="margin:0;max-width:380px;font-size:14.5px;line-height:1.6;color:#94918a">Нажмите на документ, чтобы рассмотреть его ближе.</p>
       </div>
     </div>
@@ -647,7 +658,7 @@
     <div style="max-width:1140px;margin:0 auto">
       <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a">05 — Отзывы</p>
       <div style="margin-top:44px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
-        <h2 style="margin:0;font-family:'Literata',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#1c1b19">Что говорят клиенты</h2>
+        <h2 style="margin:0;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#1c1b19">Что говорят клиенты</h2>
         <p style="margin:0;max-width:420px;font-size:14.5px;line-height:1.6;color:#94918a">Отзывы с сервисов <a href="https://spb.docdoc.ru/doctor/Boyarkin_Konstantin" target="_blank" rel="noopener" style="color:#6b6963;text-decoration:none;border-bottom:1px solid rgba(28,27,25,0.25)" data-hv="0">СберЗдоровье · DocDoc</a> и <a href="https://www.b17.ru" target="_blank" rel="noopener" style="color:#6b6963;text-decoration:none;border-bottom:1px solid rgba(28,27,25,0.25)" data-hv="0">b17</a></p>
       </div>
       <div style="margin-top:48px;position:relative">
@@ -660,7 +671,7 @@
           <blockquote data-rev-text="true" style="margin:0;font-size:15px;line-height:1.7;color:#3a3934;text-wrap:pretty">Располагающий, тактичный специалист, позволяет держать комфортную субординацию. Обстановка на сеансе доброжелательная и спокойная. Удивительно, что даже на первом сеансе удалось раскрыться и сразу начать говорить о том, что действительно тревожит и с чем хотелось бы разобраться. После сеанса появилось больше энергии, чем было до него — мне кажется, это хороший знак. Приступаю к работе!</blockquote>
           <label class="rev-toggle" for="rev0" data-rev-toggle="true" aria-hidden="true"></label>
           <figcaption style="margin-top:20px;display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata',serif;font-size:16px;color:#54524c;flex:none">А</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:16px;color:#54524c;flex:none">А</div>
             <div style="font-size:14px;font-weight:600;color:#1c1b19">Арина</div>
           </figcaption>
         </figure>
@@ -669,7 +680,7 @@
           <blockquote data-rev-text="true" style="margin:0;font-size:15px;line-height:1.7;color:#3a3934;text-wrap:pretty">Константин — просто прекрасный специалист и представитель своей профессии. Первый раз я пришёл на приём со своими проблемами в январе. Уже после первого сеанса я чувствовал облегчение, появилось ощущение, что не всё потеряно. И вот мы занимаемся уже больше полугода, и уверен, что продолжим. Константин — очень компетентный и комфортный специалист, который при необходимости подробно раскроет тему и всё объяснит, если что-то непонятно. Это мой первый опыт с психологами, и я искренне рад, что попал именно к нему. Однозначно рекомендую.</blockquote>
           <label class="rev-toggle" for="rev1" data-rev-toggle="true" aria-hidden="true"></label>
           <figcaption style="margin-top:20px;display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata',serif;font-size:16px;color:#54524c;flex:none">А</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:16px;color:#54524c;flex:none">А</div>
             <div style="font-size:14px;font-weight:600;color:#1c1b19">Андрей</div>
           </figcaption>
         </figure>
@@ -678,7 +689,7 @@
           <blockquote data-rev-text="true" style="margin:0;font-size:15px;line-height:1.7;color:#3a3934;text-wrap:pretty">Отмечу эмоциональный интеллект Константина, гибкость и умение предоставлять конструктивную обратную связь. Понравился фокус на решении приоритетной для меня проблемы, а не пула тривиальных симптомов. По итогу нескольких сессий самочувствие улучшилось, появилось понимание шагов, необходимых для закрытия своего запроса.</blockquote>
           <label class="rev-toggle" for="rev2" data-rev-toggle="true" aria-hidden="true"></label>
           <figcaption style="margin-top:20px;display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata',serif;font-size:16px;color:#54524c;flex:none">А</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:16px;color:#54524c;flex:none">А</div>
             <div style="font-size:14px;font-weight:600;color:#1c1b19">Аноним</div>
           </figcaption>
         </figure>
@@ -689,7 +700,7 @@
           <blockquote data-rev-text="true" style="margin:0;font-size:15px;line-height:1.7;color:#3a3934;text-wrap:pretty">За одну встречу получил приятные эмоции от работы с Константином. Пришёл с определённым запросом, и мы совместными шагами пришли к решению, которое очень долго не мог принять!)</blockquote>
           <label class="rev-toggle" for="rev3" data-rev-toggle="true" aria-hidden="true"></label>
           <figcaption style="margin-top:20px;display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata',serif;font-size:16px;color:#54524c;flex:none">И</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:16px;color:#54524c;flex:none">И</div>
             <div style="font-size:14px;font-weight:600;color:#1c1b19">Илья</div>
           </figcaption>
         </figure>
@@ -698,7 +709,7 @@
           <blockquote data-rev-text="true" style="margin:0;font-size:15px;line-height:1.7;color:#3a3934;text-wrap:pretty">Очень комфортный и хороший специалист! Первый раз пришла на сессию к Константину в июле — удалось быстро ему открыться и сразу же получила и облегчение, и прилив сил для решения проблем. С тех пор, если испытываю трудности, не думая обращаюсь к нему за помощью. До этого обращалась к другим психологам, с которыми либо сразу, либо спустя время чувствовала дискомфорт, — с Константином, к моему счастью, такого за полгода не произошло: я всегда знаю, что меня внимательно и активно выслушают, ни за что не осудят, не будут навязывать своё мнение, и после выхода из кабинета я буду чувствовать лёгкость. Сессии никогда не были меньше часа, а когда была возможность, Константин даже немного задерживался и никогда меня не торопил. Возможно, это немного некорректная формулировка, но в Константине я нашла что-то дружеское — и мне это подходит больше, чем что-то более официальное. Такому специалисту, в котором я тоже вижу человека, хочется доверять — и отлично получается. Константин, спасибо!</blockquote>
           <label class="rev-toggle" for="rev4" data-rev-toggle="true" aria-hidden="true"></label>
           <figcaption style="margin-top:20px;display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata',serif;font-size:16px;color:#54524c;flex:none">М</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:16px;color:#54524c;flex:none">М</div>
             <div style="font-size:14px;font-weight:600;color:#1c1b19">Мария</div>
           </figcaption>
         </figure>
@@ -707,7 +718,7 @@
           <blockquote data-rev-text="true" style="margin:0;font-size:15px;line-height:1.7;color:#3a3934;text-wrap:pretty">Очень хороший специалист! Приходили на семейную консультацию уже не первый раз. Очень хорошо налаживает коммуникацию между нами, не пытается переврать, предполагает, а не утверждает. Не раздаёт роли «абьюзер» и «жертва», а просто показывает плюсы и минусы — то, над чем надо работать, что у кого «просаживается». Спокойный, позитивный и профессиональный подход.</blockquote>
           <label class="rev-toggle" for="rev5" data-rev-toggle="true" aria-hidden="true"></label>
           <figcaption style="margin-top:20px;display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata',serif;font-size:16px;color:#54524c;flex:none">Г</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:16px;color:#54524c;flex:none">Г</div>
             <div style="font-size:14px;font-weight:600;color:#1c1b19">Герман</div>
           </figcaption>
         </figure>
@@ -718,7 +729,7 @@
           <blockquote data-rev-text="true" style="margin:0;font-size:15px;line-height:1.7;color:#3a3934;text-wrap:pretty">Первое, что впечатлило, — Константин предложил общаться на «ты»: отличный подход, помогает открыться перед незнакомым человеком. Посетив несколько консультаций, была приятно удивлена результатом: считала, что выхода из моих проблем нет, но Константин довольно быстро помог понять и отыскать самую суть проблемы. Показал себя как грамотный, компетентный специалист — и очень интересный собеседник. Качеством проделанной работы вполне удовлетворена. Рекомендую!</blockquote>
           <label class="rev-toggle" for="rev6" data-rev-toggle="true" aria-hidden="true"></label>
           <figcaption style="margin-top:20px;display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata',serif;font-size:16px;color:#54524c;flex:none">Л</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:16px;color:#54524c;flex:none">Л</div>
             <div style="font-size:14px;font-weight:600;color:#1c1b19">Людмила</div>
           </figcaption>
         </figure>
@@ -727,7 +738,7 @@
           <blockquote data-rev-text="true" style="margin:0;font-size:15px;line-height:1.7;color:#3a3934;text-wrap:pretty">К Константину обратилась по рекомендации. В отличие от других специалистов, он, не теряя времени, приступил сразу к моей проблеме — и смог мне помочь! За что я ему очень благодарна. Он тот, кто мне нужен и кого я долго искала. Будем работать и дальше. Константин — профессионал своего дела!</blockquote>
           <label class="rev-toggle" for="rev7" data-rev-toggle="true" aria-hidden="true"></label>
           <figcaption style="margin-top:20px;display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata',serif;font-size:16px;color:#54524c;flex:none">Н</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:16px;color:#54524c;flex:none">Н</div>
             <div style="font-size:14px;font-weight:600;color:#1c1b19">Наталья</div>
           </figcaption>
         </figure>
@@ -736,7 +747,7 @@
           <blockquote data-rev-text="true" style="margin:0;font-size:15px;line-height:1.7;color:#3a3934;text-wrap:pretty">Я пришла на приём к Константину в не очень хорошем эмоциональном состоянии, которое уже продолжалось весьма долго. Через пару сеансов мне стало уже значительно лучше: Константин помог мне разобраться в самой проблеме и понять причины, подсказал рабочие штуки) На протяжении всего приёма участлив, вовлечён и действительно заинтересован помочь. И мне нравится его открытая манера общения. Отличный специалист, очень рекомендую)</blockquote>
           <label class="rev-toggle" for="rev8" data-rev-toggle="true" aria-hidden="true"></label>
           <figcaption style="margin-top:20px;display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata',serif;font-size:16px;color:#54524c;flex:none">А</div>
+            <div style="width:36px;height:36px;border-radius:50%;background:#e8e6e1;display:flex;align-items:center;justify-content:center;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:16px;color:#54524c;flex:none">А</div>
             <div style="font-size:14px;font-weight:600;color:#1c1b19">Аноним</div>
           </figcaption>
         </figure>
@@ -758,7 +769,7 @@
       <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a">06 — Часто задаваемые вопросы</p>
       <div style="margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px 80px;align-items:start">
         <div data-reveal>
-          <h2 style="margin:0;font-family:'Literata',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#1c1b19;text-wrap:balance">Что полезно знать до начала работы</h2>
+          <h2 style="margin:0;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:clamp(32px,4vw,50px);line-height:1.15;color:#1c1b19;text-wrap:balance">Что полезно знать до начала работы</h2>
           <p style="margin:24px 0 0;max-width:380px;font-size:15.5px;line-height:1.7;color:#54524c;text-wrap:pretty">Если вашего вопроса здесь нет — <a href="#contact" style="color:#1c1b19;text-decoration:none;border-bottom:1px solid rgba(28,27,25,0.3)" data-hv="2">напишите мне</a>, отвечу лично.</p>
         </div>
         <div>
@@ -827,7 +838,7 @@
   <section id="contact" data-screen-label="Запись" style="padding:130px 24px 110px;scroll-margin-top:70px">
     <div style="max-width:620px;margin:0 auto;text-align:center">
       <p style="margin:0 0 28px;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a">07 — Запись</p>
-      <h2 style="margin:0;font-family:'Literata',serif;font-weight:300;font-size:clamp(36px,4.8vw,60px);line-height:1.12;color:#1c1b19;text-wrap:balance">Сделать первый шаг бывает непросто. Но это <em style="font-style:italic">проще, чем кажется</em>.</h2>
+      <h2 style="margin:0;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:clamp(36px,4.8vw,60px);line-height:1.12;color:#1c1b19;text-wrap:balance">Сделать первый шаг бывает непросто. Но это <em style="font-style:italic">проще, чем кажется</em>.</h2>
       <p style="margin:26px auto 0;max-width:460px;font-size:16.5px;line-height:1.7;color:#54524c;text-wrap:pretty">Напишите мне — подберём удобное время. Перед началом вы сможете задать любые вопросы.</p>
       <div style="margin-top:42px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap">
         <a href="https://t.me/eimnc" target="_blank" rel="noopener" style="background:#1c1b19;color:#f2f1ee;text-decoration:none;font-size:16px;font-weight:600;padding:16px 32px;border-radius:999px" data-hv="1">Telegram · @eimnc</a>
@@ -855,7 +866,7 @@
     <div data-ov="lb" role="dialog" aria-modal="true" aria-label="Просмотр документа" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(28,27,25,0.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);flex-direction:column;align-items:center;justify-content:center;padding:28px;cursor:zoom-out">
       <img data-lb-img="1" alt="" style="max-width:min(92vw,860px);max-height:70vh;border-radius:10px;box-shadow:0 40px 120px rgba(0,0,0,0.45);cursor:default">
       <div style="margin-top:22px;text-align:center;cursor:default">
-        <div style="font-family:'Literata',serif;font-size:19px;color:#faf9f7" data-lb-t="1"></div>
+        <div style="font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:19px;color:#faf9f7" data-lb-t="1"></div>
         <div style="margin-top:5px;font-size:14px;color:rgba(250,249,247,0.75)" data-lb-s="1"></div>
       </div>
       <div style="margin-top:24px;display:flex;align-items:center;gap:16px">
@@ -874,7 +885,7 @@
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:24px 28px 18px">
           <div>
             <div style="font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#94918a" data-map-kind="1"></div>
-            <div style="margin-top:8px;font-family:'Literata',serif;font-size:22px;color:#1c1b19" data-map-addr="1"></div>
+            <div style="margin-top:8px;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:22px;color:#1c1b19" data-map-addr="1"></div>
             <div style="margin-top:4px;font-size:14px;color:#6b6963" data-map-metro="1"></div>
           </div>
           <button data-map-close="true" style="flex:none;height:38px;padding:0 18px;border-radius:999px;border:1px solid #c6c3bc;background:none;color:#1c1b19;font-size:13.5px;cursor:pointer;font-family:inherit" data-hv="7">Закрыть</button>
@@ -903,26 +914,26 @@
             <div style="width:100%;height:100%;border:1px solid #d5d2ca;border-radius:20px;padding:44px 44px 38px;display:flex;flex-direction:column;align-items:center">
               <div style="width:46px;height:46px;border-radius:50%;background:#1c1b19;display:grid;place-items:center;font-family:Georgia,'Times New Roman',serif;font-size:23px;color:#f2f1ee;line-height:1">Ψ</div>
               <p style="margin:20px 0 0;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a;text-align:center">Константин Бояркин · психолог · КПТ</p>
-              <div style="margin:30px 0 0;font-family:'Literata',serif;font-weight:300;font-size:46px;line-height:1.12;letter-spacing:-0.015em;color:#1c1b19;text-align:center">Подарочный<br><em style="font-weight:400">сертификат</em></div>
+              <div style="margin:30px 0 0;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:300;font-size:46px;line-height:1.12;letter-spacing:-0.015em;color:#1c1b19;text-align:center">Подарочный<br><em style="font-weight:400">сертификат</em></div>
               <p style="margin:20px 0 0;font-size:15px;color:#54524c;text-align:center">одна онлайн-консультация · 1 час</p>
               <p style="margin:6px 0 0;font-size:13px;color:#94918a;text-align:center">аудио- или видеосвязь, из любой точки мира</p>
               <div style="flex:1 1 auto"></div>
               <div style="width:100%;display:flex;flex-direction:column;gap:26px">
                 <div style="display:flex;align-items:baseline;gap:14px">
                   <span style="flex:none;font-size:13px;color:#94918a">Кому</span>
-                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px"> </span>
+                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px"> </span>
                 </div>
                 <div style="display:flex;align-items:baseline;gap:14px">
                   <span style="flex:none;font-size:13px;color:#94918a">От кого</span>
-                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px"> </span>
+                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px"> </span>
                 </div>
                 <div style="display:flex;align-items:baseline;gap:14px">
                   <span style="flex:none;font-size:13px;color:#94918a">Сертификат №</span>
-                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px">001</span>
+                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px">001</span>
                 </div>
                 <div style="display:flex;align-items:baseline;gap:14px">
                   <span style="flex:none;font-size:13px;color:#94918a">Действителен до</span>
-                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px"> </span>
+                  <span style="flex:1 1 auto;border-bottom:1px solid #c9c6be;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-size:17px;color:#1c1b19;padding:0 2px 3px;min-height:24px"> </span>
                 </div>
               </div>
               <div style="flex:1 1 auto"></div>
@@ -952,7 +963,7 @@
         </div>
         <div data-appr-body="true" style="flex:1;overflow-y:auto;overscroll-behavior:contain;padding:60px 64px 84px">
           <div style="max-width:640px;margin:0 auto">
-            <h3 class="appr-st" style="margin:0;font-family:'Literata',serif;font-style:italic;font-weight:400;font-size:clamp(30px,4vw,44px);line-height:1.16;letter-spacing:-0.01em;color:#1c1b19;text-wrap:balance">Одна идея, на которой держится всё.</h3>
+            <h3 class="appr-st" style="margin:0;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-style:italic;font-weight:400;font-size:clamp(30px,4vw,44px);line-height:1.16;letter-spacing:-0.01em;color:#1c1b19;text-wrap:balance">Одна идея, на которой держится всё.</h3>
             <p class="appr-st" style="animation-delay:0.08s;margin:28px 0 0;font-size:16.5px;line-height:1.78;color:#54524c;text-wrap:pretty">Наши чувства и поступки запускает не сама ситуация, а то, как мы её истолковали. Между событием и реакцией всегда есть промежуточное звено — мысль. Обычно мы её проскакиваем и уверены, что расстроились «из-за того, что произошло». На деле — из-за того, что произошедшее для нас означало.</p>
             <p class="appr-st" style="animation-delay:0.14s;margin:18px 0 0;font-size:16.5px;line-height:1.78;color:#54524c;text-wrap:pretty">Лучший способ это почувствовать — увидеть. Ниже одна и та же ситуация: переключайте мысль и смотрите, как вслед за ней меняется всё остальное.</p>
           </div>
@@ -980,7 +991,7 @@
 
             <div data-s-th="true" role="button" tabIndex="0" aria-label="Мысль — нажмите, чтобы оживить" style="position:relative;z-index:1;margin-top:46px;border-width:1px;border-style:solid;border-radius:18px;padding:26px 30px;cursor:pointer;-webkit-tap-highlight-color:transparent">
               <div data-s-lab="true" style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase">Мысль</div>
-              <div data-s-th-text="true" aria-live="polite" style="margin-top:10px;font-family:'Literata',serif;font-style:italic;font-weight:400;font-size:clamp(19px,2.6vw,24px);line-height:1.42;color:#1c1b19;text-wrap:pretty">«Я его раздражаю — наверное, сделал что-то не так»</div>
+              <div data-s-th-text="true" aria-live="polite" style="margin-top:10px;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-style:italic;font-weight:400;font-size:clamp(19px,2.6vw,24px);line-height:1.42;color:#1c1b19;text-wrap:pretty">«Я его раздражаю — наверное, сделал что-то не так»</div>
             </div>
 
             <div data-s-grid="true" aria-live="polite" style="position:relative;z-index:1;margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
@@ -1001,7 +1012,7 @@
           </div>
 
           <div style="max-width:640px;margin:52px auto 0">
-            <p class="appr-st" style="animation-delay:0.26s;margin:0;font-size:16.5px;line-height:1.78;color:#54524c;text-wrap:pretty">Обратите внимание: событие не изменилось — сменилась только мысль, и за ней потянулись эмоции, тело и поведение. В этом и состоит когнитивная модель: <em style="font-style:normal;font-family:'Literata',serif">ситуация → мысль → (эмоции + телесные ощущения + поведение)</em>. Причём эти элементы не выстроены в одну сторону, а замкнуты в круг: поведение «не пишу, но проверяю телефон» подкрепляет мысль «я ему не нужен», напряжённое тело усиливает тревогу — и петля затягивается. Терапия может вмешаться в любую её точку.</p>
+            <p class="appr-st" style="animation-delay:0.26s;margin:0;font-size:16.5px;line-height:1.78;color:#54524c;text-wrap:pretty">Обратите внимание: событие не изменилось — сменилась только мысль, и за ней потянулись эмоции, тело и поведение. В этом и состоит когнитивная модель: <em style="font-style:normal;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif">ситуация → мысль → (эмоции + телесные ощущения + поведение)</em>. Причём эти элементы не выстроены в одну сторону, а замкнуты в круг: поведение «не пишу, но проверяю телефон» подкрепляет мысль «я ему не нужен», напряжённое тело усиливает тревогу — и петля затягивается. Терапия может вмешаться в любую её точку.</p>
             <p class="appr-st" style="animation-delay:0.3s;margin:18px 0 0;font-size:16.5px;line-height:1.78;color:#54524c;text-wrap:pretty">И сразу важная оговорка, чтобы не было недоразумения: КПТ — это не «думай позитивно». Спокойная интерпретация хороша не потому, что приятнее, а потому, что это одна из нескольких возможных версий, и её, как и тревожную, можно проверить на соответствие фактам. Цель — не приукрасить, а увидеть точнее. Вот этот рычаг — что мысль можно заметить и исследовать — и есть суть метода.</p>
           </div>
         </div>
