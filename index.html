@@ -20,11 +20,25 @@
   <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-300-cyrillic.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-i400-cyrillic.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-400-cyrillic.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-600-cyrillic.woff2" crossorigin>
-  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-300.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-i400.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-400.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-600.woff2" crossorigin>
+  <style>
+  /* Шрифты: один файл на начертание, только 180 символов сайта — было 16 файлов / 866 КБ,
+     стало 8 / 160 КБ. Раньше латинские сабсеты тянулись всегда (в них живут пробел, тире,
+     кавычки), из-за чего тире успевало мигнуть другим весом. @font-face встроен в HTML —
+     на один запрос к серверу меньше перед первой отрисовкой.
+     Старые файлы assets/fonts/*-cyrillic|latin.woff2 и fonts.css оставлены для отката. */
+  @font-face{font-family:'Literata';font-style:normal;font-weight:300;font-display:swap;src:url('assets/fonts/literata-300.woff2') format('woff2')}
+  @font-face{font-family:'Literata';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/literata-400.woff2') format('woff2')}
+  @font-face{font-family:'Literata';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/literata-500.woff2') format('woff2')}
+  @font-face{font-family:'Literata';font-style:italic;font-weight:300;font-display:swap;src:url('assets/fonts/literata-i300.woff2') format('woff2')}
+  @font-face{font-family:'Literata';font-style:italic;font-weight:400;font-display:swap;src:url('assets/fonts/literata-i400.woff2') format('woff2')}
+  @font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/onest-400.woff2') format('woff2')}
+  @font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/onest-500.woff2') format('woff2')}
+  @font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/onest-600.woff2') format('woff2')}
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -410,7 +424,7 @@
       </div>
       <div data-hero-photo="true" style="grid-area:photo;display:flex;justify-content:center">
         <div data-photo-wrap="true" style="position:relative;width:min(400px,80vw)">
-          <img src="assets/portrait.jpg" alt="Константин Бояркин — психолог" style="display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:50%;border:1px solid #e2e0db;box-shadow:0 24px 60px rgba(28,27,25,0.10)">
+          <img src="assets/portrait.jpg" fetchpriority="high" alt="Константин Бояркин — психолог" style="display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:50%;border:1px solid #e2e0db;box-shadow:0 24px 60px rgba(28,27,25,0.10)">
         </div>
       </div>
       <div data-hero-body="true" style="grid-area:body">
@@ -470,7 +484,7 @@
   </section>
 
   <!-- ================= HELP ================= -->
-  <section id="help" data-screen-label="С чем я работаю" style="position:relative;overflow:hidden;padding:130px 24px;background-image:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64)),url('assets/bg-session.jpg');background-repeat:no-repeat,no-repeat;background-size:cover,cover;background-position:center,center;background-attachment:fixed,fixed;scroll-margin-top:70px">
+  <section id="help" data-screen-label="С чем я работаю" style="position:relative;overflow:hidden;padding:130px 24px;background-color:#2e261f;background-image:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64)),url('assets/bg-session.jpg');background-repeat:no-repeat,no-repeat;background-size:cover,cover;background-position:center,center;background-attachment:fixed,fixed;scroll-margin-top:70px">
     <div data-help-bg style="display:none;position:fixed;inset:0;z-index:0;background:url('assets/bg-session.jpg') center/cover no-repeat;pointer-events:none"></div>
     <div data-help-overlay style="display:none;position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64));pointer-events:none"></div>
     <div style="position:relative;z-index:2;max-width:1140px;margin:0 auto">
@@ -2041,4 +2055,3 @@
 </script>
 </body>
 </html>
- 
