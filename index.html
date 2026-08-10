@@ -20,30 +20,34 @@
   <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-var.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-i-var.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-var.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-300.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-i400.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-400.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-600.woff2" crossorigin>
   <style>
-  /* Шрифты: три ПЕРЕМЕННЫХ файла на весь сайт, только 180 символов сайта.
-     История веса: 16 файлов / 866 КБ → 8 / 318 КБ → 3 / 244,5 КБ.
-     Один файл держит диапазон весов (300 500 / 300 400 / 400 600) — начертания все
-     на месте, рисунок совпадает с прежними файлами (проверено: отклонение ширины
-     строки максимум 0,08% на всех весах и на заголовке 72px).
-     Ось opsz у Literata сохранена — без неё крупные заголовки становятся плотнее.
-     unicode-range не задан: один файл покрывает и кириллицу, и латиницу, поэтому тире
-     и кавычки больше не приезжают отдельным файлом другого веса.
-     Прежние 8 файлов literata-300…onest-600 и старые сабсеты оставлены для отката. */
-  /* font-display:block, а не swap. При swap браузер СНАЧАЛА рисует текст фолбэком и
-     потом подменяет — это и есть видимое «елозание» букв на первой загрузке (метрики
-     фолбэков ниже держат вёрстку на месте, но очертания всё равно меняются на глазах).
-     При block текст просто ждёт файл и появляется уже правильным; окно ожидания
-     ограничено 3 с, после чего браузер всё же покажет фолбэк — то есть худший случай
-     равен прежнему поведению, просто позже. Файлы в preload и приходят первыми.
-     ⚠ Плата: на очень медленном канале первый экран пустеет на время прилёта шрифта,
-     поэтому FCP в PageSpeed может подрасти. Откат = одно слово block → swap ×3. */
-  @font-face{font-family:'Literata';font-style:normal;font-weight:300 500;font-display:block;src:url('assets/fonts/literata-var.woff2') format('woff2')}
-  @font-face{font-family:'Literata';font-style:italic;font-weight:300 400;font-display:block;src:url('assets/fonts/literata-i-var.woff2') format('woff2')}
-  @font-face{font-family:'Onest';font-style:normal;font-weight:400 600;font-display:block;src:url('assets/fonts/onest-var.woff2') format('woff2')}
+  /* Шрифты: восемь СТАТИЧНЫХ файлов (по одному на начертание), набор 180 символов сайта,
+     режим block. Почему не переменные: один переменный файл держит все веса сразу,
+     поэтому качается целиком даже ради одного веса — критический путь до появления
+     текста был 244,5 КБ. Восемь отдельных файлов дают ~194 КБ на первый экран
+     (300 + курсив 400 + Onest 400/600 в preload, 500 подхватывается при первой вёрстке),
+     остальные начертания приезжают позже и текст не задерживают. Общий вес больше
+     (318 вместо 244,5 КБ), но для скорости первой отрисовки важен не он, а критический путь.
+     block, а не swap: при swap браузер сначала рисует текст фолбэком и потом подменяет —
+     это и есть видимое «елозание» букв (метрики фолбэков ниже держат вёрстку на месте,
+     но очертания всё равно меняются на глазах). При block текст ждёт файл и появляется
+     уже правильным; окно ожидания 3 с, после него браузер всё же покажет фолбэк.
+     unicode-range не задан — один файл на начертание покрывает и кириллицу, и латиницу,
+     поэтому тире и кавычки не приезжают отдельным файлом другого веса.
+     Переменные файлы literata-var / literata-i-var / onest-var и старые 16 сабсетов
+     оставлены в assets/fonts/ для отката. */
+  @font-face{font-family:'Literata';font-style:normal;font-weight:300;font-display:block;src:url('assets/fonts/literata-300.woff2') format('woff2')}
+  @font-face{font-family:'Literata';font-style:normal;font-weight:400;font-display:block;src:url('assets/fonts/literata-400.woff2') format('woff2')}
+  @font-face{font-family:'Literata';font-style:normal;font-weight:500;font-display:block;src:url('assets/fonts/literata-500.woff2') format('woff2')}
+  @font-face{font-family:'Literata';font-style:italic;font-weight:300;font-display:block;src:url('assets/fonts/literata-i300.woff2') format('woff2')}
+  @font-face{font-family:'Literata';font-style:italic;font-weight:400;font-display:block;src:url('assets/fonts/literata-i400.woff2') format('woff2')}
+  @font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:block;src:url('assets/fonts/onest-400.woff2') format('woff2')}
+  @font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:block;src:url('assets/fonts/onest-500.woff2') format('woff2')}
+  @font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:block;src:url('assets/fonts/onest-600.woff2') format('woff2')}
   /* Метрики фолбэков. Пока грузятся Literata/Onest, системный шрифт занимает РОВНО столько
      же места (size-adjust подгоняет ширину, ascent/descent-override — высоту строки), поэтому
      в момент подмены ничего не переверстывается: уходит CLS и «елозание» строк при первой
