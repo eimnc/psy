@@ -33,9 +33,17 @@
      unicode-range не задан: один файл покрывает и кириллицу, и латиницу, поэтому тире
      и кавычки больше не приезжают отдельным файлом другого веса.
      Прежние 8 файлов literata-300…onest-600 и старые сабсеты оставлены для отката. */
-  @font-face{font-family:'Literata';font-style:normal;font-weight:300 500;font-display:swap;src:url('assets/fonts/literata-var.woff2') format('woff2')}
-  @font-face{font-family:'Literata';font-style:italic;font-weight:300 400;font-display:swap;src:url('assets/fonts/literata-i-var.woff2') format('woff2')}
-  @font-face{font-family:'Onest';font-style:normal;font-weight:400 600;font-display:swap;src:url('assets/fonts/onest-var.woff2') format('woff2')}
+  /* font-display:block, а не swap. При swap браузер СНАЧАЛА рисует текст фолбэком и
+     потом подменяет — это и есть видимое «елозание» букв на первой загрузке (метрики
+     фолбэков ниже держат вёрстку на месте, но очертания всё равно меняются на глазах).
+     При block текст просто ждёт файл и появляется уже правильным; окно ожидания
+     ограничено 3 с, после чего браузер всё же покажет фолбэк — то есть худший случай
+     равен прежнему поведению, просто позже. Файлы в preload и приходят первыми.
+     ⚠ Плата: на очень медленном канале первый экран пустеет на время прилёта шрифта,
+     поэтому FCP в PageSpeed может подрасти. Откат = одно слово block → swap ×3. */
+  @font-face{font-family:'Literata';font-style:normal;font-weight:300 500;font-display:block;src:url('assets/fonts/literata-var.woff2') format('woff2')}
+  @font-face{font-family:'Literata';font-style:italic;font-weight:300 400;font-display:block;src:url('assets/fonts/literata-i-var.woff2') format('woff2')}
+  @font-face{font-family:'Onest';font-style:normal;font-weight:400 600;font-display:block;src:url('assets/fonts/onest-var.woff2') format('woff2')}
   /* Метрики фолбэков. Пока грузятся Literata/Onest, системный шрифт занимает РОВНО столько
      же места (size-adjust подгоняет ширину, ascent/descent-override — высоту строки), поэтому
      в момент подмены ничего не переверстывается: уходит CLS и «елозание» строк при первой
