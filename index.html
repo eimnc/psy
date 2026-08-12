@@ -24,6 +24,7 @@
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-500.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-i400.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-400.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-500.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-600.woff2" crossorigin>
   <style>
   /* Шрифты: восемь СТАТИЧНЫХ файлов (по одному на начертание), набор 180 символов сайта,
@@ -39,12 +40,17 @@
      уже правильным; окно ожидания 3 с, после него браузер всё же покажет фолбэк.
      unicode-range не задан — один файл на начертание покрывает и кириллицу, и латиницу,
      поэтому тире и кавычки не приезжают отдельным файлом другого веса.
+     Объявлено ШЕСТЬ начертаний из восьми — ровно те, что нужны шапке и блоку героя
+     (Literata 300/500 + курсив 400, Onest 400/500/600), все шесть в preload — 210 КБ.
+     Два остальных (Literata 400 — цены; Literata курсив 300 — акценты в h2) объявляются
+     скриптом позже, см. «Отложенные начертания» ниже. Начертание, которое нужно
+     шапке или герою, обязано быть объявлено ЗДЕСЬ: при block объявленный шрифт
+     держит текст невидимым до своего прихода (подмены не видно), а НЕобъявленный
+     рисуется соседним весом и потом меняется на глазах.
      Переменные файлы literata-var / literata-i-var / onest-var и старые 16 сабсетов
      оставлены в assets/fonts/ для отката. */
   @font-face{font-family:'Literata';font-style:normal;font-weight:300;font-display:block;src:url('assets/fonts/literata-300.woff2') format('woff2')}
-  @font-face{font-family:'Literata';font-style:normal;font-weight:400;font-display:block;src:url('assets/fonts/literata-400.woff2') format('woff2')}
   @font-face{font-family:'Literata';font-style:normal;font-weight:500;font-display:block;src:url('assets/fonts/literata-500.woff2') format('woff2')}
-  @font-face{font-family:'Literata';font-style:italic;font-weight:300;font-display:block;src:url('assets/fonts/literata-i300.woff2') format('woff2')}
   @font-face{font-family:'Literata';font-style:italic;font-weight:400;font-display:block;src:url('assets/fonts/literata-i400.woff2') format('woff2')}
   @font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:block;src:url('assets/fonts/onest-400.woff2') format('woff2')}
   @font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:block;src:url('assets/fonts/onest-500.woff2') format('woff2')}
@@ -397,6 +403,41 @@
        window.load — на медленной сети герой был виден с ~2 с, затем гас и
        проявлялся заново в момент полной загрузки. */
     document.documentElement.classList.add('hero-in');
+
+    /* Отложенные начертания. В критическом пути оставлены только шапка и блок героя
+       (шесть начертаний, 210 КБ, все в preload) — решение пользователя 13.08.2026.
+       Отложены два (108 КБ): Literata 400 — цены в «Форматах» (y≈3300); Literata курсив 300 —
+       акценты в h2 «Обо мне» (y≈1119) и «Запись». Иначе браузер верстает весь документ
+       и тянет все восемь файлов сразу (318 КБ), отбирая полосу у портрета — элемента LCP.
+       Пока объявления нет, эти места рисуются той же Literata соседнего веса (браузер берёт
+       ближайший доступный вес внутри семейства, а не системный шрифт): цены — весом 500,
+       курсивы — курсивом 400, как в герое. Затем встают на свой вес.
+       ⚠ Курсив в h2 «Обо мне» лежит на y≈1119: на мониторе с окном выше 1119px он виден
+       без прокрутки, и там смена курсива 400 → 300 заметна глазом. Убрать совсем можно
+       так: задать этим двум курсивам font-weight:400 — тогда i300 не нужен вовсе (−56,5 КБ),
+       но это меняет вид на волос.
+       Объявляем, когда приехали шрифты первого экрана, но не позже 1,8 с, и сразу при
+       первой прокрутке. */
+    (function () {
+      var added = false;
+      function addLate() {
+        if (added) return;
+        added = true;
+        var s = document.createElement('style');
+        s.textContent =
+          "@font-face{font-family:'Literata';font-style:normal;font-weight:400;font-display:block;src:url('assets/fonts/literata-400.woff2') format('woff2')}" +
+          "@font-face{font-family:'Literata';font-style:italic;font-weight:300;font-display:block;src:url('assets/fonts/literata-i300.woff2') format('woff2')}";
+        document.head.appendChild(s);
+      }
+      if (document.fonts && document.fonts.load) {
+        Promise.all([
+          '300 1em Literata', '500 1em Literata', 'italic 400 1em Literata',
+          '400 1em Onest', '600 1em Onest'
+        ].map(function (f) { return document.fonts.load(f, 'Аа'); })).then(addLate, addLate);
+      }
+      setTimeout(addLate, 1800);
+      window.addEventListener('scroll', addLate, { once: true, passive: true });
+    })();
   </script>
 <style>
 @media (hover:hover) and (pointer:fine){
