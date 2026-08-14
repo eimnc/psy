@@ -1276,7 +1276,7 @@
   function openAppr(){lastAppr=document.activeElement;apprOn=true;ovAppr.style.display='flex';lock();focusSel('[data-appr-close]');requestAnimationFrame(function(){requestAnimationFrame(function(){if(window.__smerInit)window.__smerInit();});});}
   function closeAppr(){if(window.__smerStop)window.__smerStop();apprOn=false;ovAppr.style.display='none';lock();back(lastAppr);lastAppr=null;}
   function certFit(){var w=q('[data-cert-wrap]');if(!w)return;var b=w.querySelector('[data-cert-box]');var k=Math.min(1,w.clientWidth/540);b.style.transform='scale('+k+')';w.style.height=Math.round(810*k)+'px';}
-  function openCert(){lastCert=document.activeElement;certOn=true;ovCert.style.display='flex';lock();var qrI=q('[data-ov="cert"] img[loading="lazy"]');if(qrI)qrI.loading='eager';focusSel('[data-cert-close]');requestAnimationFrame(function(){requestAnimationFrame(certFit);});}
+  function openCert(){lastCert=document.activeElement;certOn=true;ovCert.style.display='flex';lock();var qrI=q('[data-ov="cert"] img[loading="lazy"]');if(qrI)qrI.loading='eager';focusSel('[data-cert-close]');certFit();requestAnimationFrame(function(){requestAnimationFrame(certFit);});setTimeout(certFit,160);}
   function closeCert(){certOn=false;ovCert.style.display='none';lock();back(lastCert);lastCert=null;}
   window.addEventListener('resize',function(){if(certOn)certFit();});
   document.addEventListener('click',function(e){
