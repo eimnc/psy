@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-300.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-500.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-500-name.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/literata-i400.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-400.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/onest-500.woff2" crossorigin>
@@ -41,7 +41,12 @@
      unicode-range не задан — один файл на начертание покрывает и кириллицу, и латиницу,
      поэтому тире и кавычки не приезжают отдельным файлом другого веса.
      Объявлено ШЕСТЬ начертаний из восьми — ровно те, что нужны шапке и блоку героя
-     (Literata 300/500 + курсив 400, Onest 400/500/600), все шесть в preload — 210 КБ.
+     (Literata 300/500 + курсив 400, Onest 400/500/600), все шесть в preload — 160 КБ.
+     ⚠ Literata 500 — особый файл `literata-500-name.woff2` (4,8 КБ вместо 55,3): этот вес
+     используется РОВНО в одном месте — «Константин Бояркин» в шапке — и в файле лежат
+     только 12 его знаков (ось opsz сохранена, рисунок тот же). ЕСЛИ ИМЯ В ШАПКЕ
+     ИЗМЕНИТСЯ — новая буква нарисуется соседним весом; пересобрать файл можно
+     страницей «Шрифты - помощник.dc.html». Полный literata-500.woff2 оставлен для отката.
      Два остальных (Literata 400 — цены; Literata курсив 300 — акценты в h2) объявляются
      скриптом позже, см. «Отложенные начертания» ниже. Начертание, которое нужно
      шапке или герою, обязано быть объявлено ЗДЕСЬ: при block объявленный шрифт
@@ -50,7 +55,7 @@
      Переменные файлы literata-var / literata-i-var / onest-var и старые 16 сабсетов
      оставлены в assets/fonts/ для отката. */
   @font-face{font-family:'Literata';font-style:normal;font-weight:300;font-display:block;src:url('assets/fonts/literata-300.woff2') format('woff2')}
-  @font-face{font-family:'Literata';font-style:normal;font-weight:500;font-display:block;src:url('assets/fonts/literata-500.woff2') format('woff2')}
+  @font-face{font-family:'Literata';font-style:normal;font-weight:500;font-display:block;src:url('assets/fonts/literata-500-name.woff2') format('woff2')}
   @font-face{font-family:'Literata';font-style:italic;font-weight:400;font-display:block;src:url('assets/fonts/literata-i400.woff2') format('woff2')}
   @font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:block;src:url('assets/fonts/onest-400.woff2') format('woff2')}
   @font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:block;src:url('assets/fonts/onest-500.woff2') format('woff2')}
