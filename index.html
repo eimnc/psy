@@ -460,6 +460,42 @@
       setTimeout(addLate, 1800);
       window.addEventListener('scroll', addLate, { once: true, passive: true });
     })();
+
+    /* Фон параллакса (85,4 КБ) нужен со второго экрана, поэтому из критического окна убран:
+       в разметке остаётся подложка #2e261f + тот же затемняющий градиент, что лежит поверх
+       фото, — пока картинки нет, секция просто тёмная, серого провала не будет.
+       Картинку сначала грузим в память и только потом ставим фоном — подмена в один кадр.
+       Запуск: после полной загрузки страницы (+200 мс, то есть раньше тихой очереди
+       дипломов) и немедленно при первой прокрутке.
+       ⚠ Ставим ОБА места: десктоп — сама секция (background-attachment:fixed), мобайл —
+       слой [data-help-bg]. Лишнего запроса не будет: на мобиле у секции
+       background-image:none !important, на десктопе слой display:none. */
+    (function () {
+      var SRC = 'assets/bg-session.jpg', started = false, tries = 0;
+      function paint() {
+        var secs = document.querySelectorAll('#help');
+        var lays = document.querySelectorAll('#help [data-help-bg]');
+        if (!secs.length && ++tries < 6) { setTimeout(paint, 600); return; }
+        Array.prototype.forEach.call(secs, function (s) {
+          s.style.backgroundImage =
+            "linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64)),url('" + SRC + "')";
+        });
+        Array.prototype.forEach.call(lays, function (l) {
+          l.style.backgroundImage = "url('" + SRC + "')";
+        });
+      }
+      function start() {
+        if (started) return;
+        started = true;
+        var im = new Image();
+        im.onload = paint;
+        im.onerror = paint;
+        im.src = SRC;
+      }
+      if (document.readyState === 'complete') setTimeout(start, 200);
+      else window.addEventListener('load', function () { setTimeout(start, 200); });
+      window.addEventListener('scroll', start, { once: true, passive: true });
+    })();
   </script>
 <style>
 @media (hover:hover) and (pointer:fine){
@@ -569,8 +605,8 @@
   </section>
 
   <!-- ================= HELP ================= -->
-  <section id="help" data-screen-label="С чем я работаю" style="position:relative;overflow:hidden;padding:130px 24px;background-color:#2e261f;background-image:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64)),url('assets/bg-session.jpg');background-repeat:no-repeat,no-repeat;background-size:cover,cover;background-position:center,center;background-attachment:fixed,fixed;scroll-margin-top:70px">
-    <div data-help-bg style="display:none;position:fixed;inset:0;z-index:0;background:url('assets/bg-session.jpg') center/cover no-repeat;pointer-events:none"></div>
+  <section id="help" data-screen-label="С чем я работаю" style="position:relative;overflow:hidden;padding:130px 24px;background-color:#2e261f;background-image:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64));background-repeat:no-repeat,no-repeat;background-size:cover,cover;background-position:center,center;background-attachment:fixed,fixed;scroll-margin-top:70px">
+    <div data-help-bg style="display:none;position:fixed;inset:0;z-index:0;background:center/cover no-repeat;pointer-events:none"></div>
     <div data-help-overlay style="display:none;position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64));pointer-events:none"></div>
     <div style="position:relative;z-index:2;max-width:1140px;margin:0 auto">
       <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.62)">02 — С чем я работаю</p>
