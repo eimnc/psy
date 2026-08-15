@@ -532,9 +532,23 @@
 </style>
 </head>
 <body>
+  <!-- ЗАГЛУШКА ПОЛОСЫ НАД ШАПКОЙ (16.08.2026). Встроенный браузер Telegram рисует страницу
+     выше отданной ей области и кладёт туда свою полупрозрачную панель — сквозь неё
+     просвечивал прокручиваемый текст. Область не видна ни из CSS (safe-area-inset-top = 0
+     даже при viewport-fit=cover), ни из JS (rect.top липкой шапки = 0) — но РИСОВАТЬ в неё
+     страница может. Поэтому две заглушки в цвет шапки висят на 240px ВЫШЕ верха экрана:
+     sticky (снаружи #top — внутри его overflow-x:hidden обрезал бы) и fixed (у самой шапки).
+     Проверено в Telegram: красятся ОБА способа, поэтому оставлены оба. В обычных браузерах
+     они за краем экрана: не видны, вёрстку не сдвигают, прокрутку не удлиняют, тапы не
+     перехватывают (pointer-events:none). НЕ УДАЛЯТЬ по одной. -->
+  <div data-tgcap="sticky" style="position:sticky;top:-240px;height:240px;margin-top:-240px;z-index:119;background:#f2f1ee;pointer-events:none"></div>
+  
 <div id="top" style="position:relative;font-family:'Onest','OneFbR','OneFbH','OneFbW',-apple-system,'Helvetica Neue',sans-serif;background:#f2f1ee;color:#1c1b19;overflow-x:hidden">
 
   <!-- ================= NAV ================= -->
+  <!-- вторая заглушка полосы над шапкой (см. комментарий выше) -->
+  <div data-tgcap="fixed" style="position:fixed;top:-240px;left:0;right:0;height:240px;z-index:119;background:#f2f1ee;pointer-events:none"></div>
+
   <div style="position:fixed;top:0;left:0;right:0;z-index:120;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(242,241,238,0.85);border-bottom:1px solid #e2e0db">
     <nav style="max-width:1140px;margin:0 auto;display:flex;align-items:center;gap:28px;height:62px;padding:0 24px">
       <a href="#top" style="color:#1c1b19;text-decoration:none;font-family:'Literata','LitFbA','LitFbG','LitFbT',serif;font-weight:500;font-size:16.5px;white-space:nowrap">Константин Бояркин</a>
@@ -2191,7 +2205,37 @@
   else window.addEventListener('load', start, { once: true });
 })();
 </script>
-<!-- ТЕЛЕФОН. Номер не лежит в разметке: три ссылки <a data-tel="1"> пустые, текст и href="tel:..." им проставляет скрипт ниже (защита от сборщиков, не исполняющих JS).
+<script>
+  /* ФИКС МАСШТАБА ФОНА ПАРАЛЛАКСА (16.08.2026). Встроенный браузер Telegram на iOS реально
+     МЕНЯЕТ размер окна, когда выезжает его нижняя панель: innerHeight прыгает 733 → 636, а
+     вместе с ним 100lvh, высота мобильного слоя и масштаб cover — замерено 62,1% ⟷ 71,6%,
+     фон заметно «дышал» (эффект был и до заглушек над шапкой, не из-за них). Единицы vh/lvh
+     тут не спасают: окно правда другое. Поэтому высота слоя пришпиливается в пикселях по
+     САМОМУ БОЛЬШОМУ виденному окну и никогда не уменьшается — картинка стоит, при выезде
+     панели её нижний край просто прикрывается. Растёт максимум один раз за загрузку (на
+     первой прокрутке, обычно до появления секции). Сброс — только при смене ориентации.
+     На десктопе (>820px) инлайновая высота снимается: там слой живёт на inset:0. */
+  (function () {
+    var pin = 0, ori = -1;
+    function fit() {
+      var mob = window.matchMedia('(max-width:820px)').matches;
+      var o = window.innerWidth > window.innerHeight ? 1 : 0;
+      if (o !== ori) { ori = o; pin = 0; }
+      if (mob && window.innerHeight > pin) pin = window.innerHeight;
+      var l = document.querySelectorAll('#help [data-help-bg]');
+      for (var i = 0; i < l.length; i++) l[i].style.height = mob ? pin + 'px' : '';
+    }
+    fit();
+    window.addEventListener('resize', fit);
+    window.addEventListener('orientationchange', function () { setTimeout(fit, 250); });
+    if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
+    document.addEventListener('DOMContentLoaded', fit);
+    window.addEventListener('load', fit);
+    setTimeout(fit, 400);
+    setTimeout(fit, 1500);
+  })();
+  </script>
+  <!-- ТЕЛЕФОН. Номер не лежит в разметке: три ссылки <a data-tel="1"> пустые, текст и href="tel:..." им проставляет скрипт ниже (защита от сборщиков, не исполняющих JS).
      СМЕНИТЬ НОМЕР: поправить массив p ниже (код страны, код оператора, три группы цифр) — больше нигде номера нет.
      ОТКАТИТЬ: удалить этот скрипт и вписать в каждую из трёх ссылок href="tel:+7..." и сам номер текстом. -->
 <script>(function(){var p=['+7','996','799','08','44'],t=p[0]+' '+p[1]+' '+p[2]+'-'+p[3]+'-'+p[4],h='tel:'+p.join(''),a=document.querySelectorAll('a[data-tel]'),i;for(i=0;i<a.length;i++){a[i].textContent=t;a[i].setAttribute('href',h)}})();</script>
