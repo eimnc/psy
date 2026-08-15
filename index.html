@@ -967,7 +967,7 @@
       <p style="margin:26px auto 0;max-width:460px;font-size:16.5px;line-height:1.7;color:#54524c;text-wrap:pretty">Напишите мне — подберём удобное время. Перед началом вы сможете задать любые вопросы.</p>
       <div style="margin-top:42px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap">
         <a href="https://t.me/eimnc" target="_blank" rel="noopener" style="background:#1c1b19;color:#f2f1ee;text-decoration:none;font-size:16px;font-weight:600;padding:16px 32px;border-radius:999px" data-hv="1">Telegram · @eimnc</a>
-        <a href="tel:+79967990844" style="border:1px solid #c6c3bc;color:#1c1b19;text-decoration:none;font-size:16px;font-weight:500;padding:16px 32px;border-radius:999px" data-hv="7">+7 996 799-08-44</a>
+        <a data-tel="1" style="border:1px solid #c6c3bc;color:#1c1b19;text-decoration:none;font-size:16px;font-weight:500;padding:16px 32px;border-radius:999px" data-hv="7"></a>
       </div>
       <p style="margin:30px 0 0;font-size:13.5px;color:#94918a">Конфиденциальность гарантирована</p>
     </div>
@@ -981,7 +981,7 @@
       <div style="font-size:13px;color:#a3a09a">© 2026 Константин Бояркин · психолог, когнитивно-поведенческая терапия</div>
       <div style="display:flex;gap:22px;font-size:13px">
         <a href="https://t.me/eimnc" target="_blank" rel="noopener" style="color:#6b6963;text-decoration:none" data-hv="0">Telegram</a>
-        <a href="tel:+79967990844" style="color:#6b6963;text-decoration:none" data-hv="0">+7 996 799-08-44</a>
+        <a data-tel="1" style="color:#6b6963;text-decoration:none" data-hv="0"></a>
       </div>
     </div>
   </footer>
@@ -1067,7 +1067,7 @@
                 <div style="flex:1 1 auto">
                   <div style="font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#94918a">Запись и вопросы</div>
                   <div style="margin-top:8px;font-size:15px;font-weight:600;color:#1c1b19">t.me/eimnc</div>
-                  <div style="margin-top:4px;font-size:13.5px;color:#54524c"><a href="tel:+79967990844" style="color:#54524c;text-decoration:none">+7 996 799-08-44</a></div>
+                  <div style="margin-top:4px;font-size:13.5px;color:#54524c"><a data-tel="1" style="color:#54524c;text-decoration:none"></a></div>
                   <div style="margin-top:4px;font-size:12.5px;color:#94918a">eimnc.github.io/psy</div>
                 </div>
               </div>
@@ -2189,5 +2189,6 @@
   else window.addEventListener('load', start, { once: true });
 })();
 </script>
+<script>(function(){var p=['+7','996','799','08','44'],t=p[0]+' '+p[1]+' '+p[2]+'-'+p[3]+'-'+p[4],h='tel:'+p.join(''),a=document.querySelectorAll('a[data-tel]'),i;for(i=0;i<a.length;i++){a[i].textContent=t;a[i].setAttribute('href',h)}})();</script>
 </body>
 </html>
