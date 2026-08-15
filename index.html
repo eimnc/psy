@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f2f1ee">
 <title>Константин Бояркин — психолог · КПТ, Санкт-Петербург</title>
 <meta name="description" content="Константин Бояркин — психолог, когнитивно-поведенческая терапия. Помогаю с тревогой, апатией, выгоранием и навязчивыми мыслями. Санкт-Петербург и онлайн.">
 <link rel="canonical" href="https://eimnc.github.io/psy/">
@@ -2189,6 +2191,9 @@
   else window.addEventListener('load', start, { once: true });
 })();
 </script>
+<!-- ТЕЛЕФОН. Номер не лежит в разметке: три ссылки <a data-tel="1"> пустые, текст и href="tel:..." им проставляет скрипт ниже (защита от сборщиков, не исполняющих JS).
+     СМЕНИТЬ НОМЕР: поправить массив p ниже (код страны, код оператора, три группы цифр) — больше нигде номера нет.
+     ОТКАТИТЬ: удалить этот скрипт и вписать в каждую из трёх ссылок href="tel:+7..." и сам номер текстом. -->
 <script>(function(){var p=['+7','996','799','08','44'],t=p[0]+' '+p[1]+' '+p[2]+'-'+p[3]+'-'+p[4],h='tel:'+p.join(''),a=document.querySelectorAll('a[data-tel]'),i;for(i=0;i<a.length;i++){a[i].textContent=t;a[i].setAttribute('href',h)}})();</script>
 </body>
 </html>
