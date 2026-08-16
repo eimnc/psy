@@ -636,7 +636,7 @@
   </section>
 
   <!-- ================= HELP ================= -->
-  <section id="help" data-screen-label="С чем я работаю" style="position:relative;overflow:hidden;padding:130px 24px;background-color:#2e261f;background-image:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64));background-repeat:no-repeat,no-repeat;background-size:cover,cover;background-position:center,center;background-attachment:fixed,fixed;scroll-margin-top:70px">
+  <section id="help" data-screen-label="С чем я работаю" style="position:relative;overflow:hidden;padding:130px 24px;background-color:#5b4330;background-image:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64));background-repeat:no-repeat,no-repeat;background-size:cover,cover;background-position:center,center;background-attachment:fixed,fixed;scroll-margin-top:70px">
     <div data-help-bg style="display:none;position:fixed;inset:0;z-index:0;background:center/cover no-repeat;pointer-events:none"></div>
     <div data-help-overlay style="display:none;position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64));pointer-events:none"></div>
     <div style="position:relative;z-index:2;max-width:1140px;margin:0 auto">
@@ -2223,7 +2223,10 @@
       if (o !== ori) { ori = o; pin = 0; }
       if (mob && window.innerHeight > pin) pin = window.innerHeight;
       var l = document.querySelectorAll('#help [data-help-bg]');
-      for (var i = 0; i < l.length; i++) l[i].style.height = mob ? pin + 'px' : '';
+      for (var i = 0; i < l.length; i++) {
+        l[i].style.height = mob ? (pin + 60) + 'px' : '';
+        l[i].style.top = mob ? '-30px' : '';
+      }
     }
     fit();
     window.addEventListener('resize', fit);
