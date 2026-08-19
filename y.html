@@ -641,7 +641,7 @@
          Обычный (не прижатый к экрану) слой с той же картинкой, тем же масштабом и на том же месте.
          Прижатый слой ниже накрывает его целиком, поэтому виден двойник только там, где прижатый
          слой обрезан вебвью Telegram — в зоне его нижней панели. Всё, что нужно, ставит скрипт. -->
-    <div data-help-bg2 style="display:none;position:absolute;left:0;top:0;width:100vw;height:0;z-index:0;background-repeat:no-repeat;pointer-events:none"></div>
+    <div data-help-bg2 style="display:none;position:absolute;left:0;top:0;width:100vw;height:100%;z-index:0;background-repeat:repeat-y;pointer-events:none"></div>
     <div data-help-bg style="display:none;position:fixed;inset:0;z-index:0;background:center/cover no-repeat;pointer-events:none"></div>
     <div data-help-overlay style="display:none;position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64));pointer-events:none"></div>
     <div style="position:relative;z-index:2;max-width:1140px;margin:0 auto">
@@ -2215,75 +2215,71 @@
      ОТКАТИТЬ: удалить этот скрипт и вписать в каждую из трёх ссылок href="tel:+7..." и сам номер текстом. -->
 <script>(function(){var p=['+7','996','799','08','44'],t=p[0]+' '+p[1]+' '+p[2]+'-'+p[3]+'-'+p[4],h='tel:'+p.join(''),a=document.querySelectorAll('a[data-tel]'),i;for(i=0;i<a.length;i++){a[i].textContent=t;a[i].setAttribute('href',h)}})();</script>
 <script>
-/* ФОТО ПАРАЛЛАКСА ПОД НИЖНЕЙ ПАНЕЛЬЮ TELEGRAM (18.08.2026).
-   Симптом: когда выезжает нижняя панель Telegram, под ней вместо фотографии сплошная полоса.
-   Причина: слой фона прижат к экрану (position:fixed), а clip-path секции режет прижатых
-   потомков по СЖАТОМУ окну (636 вместо 733) — в зону панели картинка просто не попадает.
-   Обычное содержимое там рисуется нормально (текст соседних разделов уходит под панель и
-   размывается). Отсюда решение: под прижатый слой кладётся ОБЫЧНЫЙ слой-двойник
-   [data-help-bg2] — та же картинка, тот же масштаб, то же место, — и он закрывает зону панели.
-   Вид сайта не меняется: сверху двойник целиком накрыт самим прижатым слоем (параллакс и его
-   плавность не тронуты), затемнение [data-help-overlay] лежит выше обоих, поэтому тон совпадает.
-   Работает на любой позиции прокрутки: двойник — ребёнок секции, его границы = границы секции. */
+/* ФОТО ПАРАЛЛАКСА ПОД НИЖНЕЙ ПАНЕЛЬЮ TELEGRAM (18.08.2026, редакция 2).
+   Прижатый к экрану слой [data-help-bg] в зоне нижней панели Telegram не рисуется: clip-path
+   секции режет прижатых потомков по СЖАТОМУ окну (636 вместо 733). Обычное содержимое там
+   рисуется нормально. Поэтому под слой положен ОБЫЧНЫЙ слой-двойник [data-help-bg2] — та же
+   картинка того же масштаба, но он лежит в потоке на всю высоту секции и ничем не двигается:
+   браузер рисует его сам, поэтому он не трясётся при инерционной прокрутке и не пропадает ни
+   на какой позиции. Сверху его целиком накрывает прижатый слой, так что вид не меняется —
+   двойник видно только в зоне панели (и под панелью он размывается вместе со всем остальным).
+   ⚠ Двойник НЕ трогать покадрово: любая покадровая правка top возвращает тряску.
+   Плюс здесь же ФИКС МАСШТАБА: высота прижатого слоя пришпилена в пикселях по самому большому
+   виденному окну (100lvh в этом вебвью меняется вместе с панелью, и фон «дышал» 62% ⟷ 72%).
+   Масштаб cover считается от той же пришпиленной высоты — у слоя и у двойника он одинаковый. */
 (function () {
   var IW = 1536, IH = 1024;                 /* натуральный размер assets/bg-session.jpg */
-  var S = null, L = null, C = null, pin = 0, ori = -1, geo = "", img = "";
+  var S = null, L = null, C = null, pin = 0, ori = -1, key = '', img = '';
   function ready() {
-    if (!S) S = document.getElementById("help");
-    if (!L) L = document.querySelector("#help [data-help-bg]");
-    if (!C) C = document.querySelector("#help [data-help-bg2]");
+    if (!S) S = document.getElementById('help');
+    if (!L) L = document.querySelector('#help [data-help-bg]');
+    if (!C) C = document.querySelector('#help [data-help-bg2]');
     return !!(S && L && C);
   }
-  function hide() { if (C && C.style.display !== "none") { C.style.display = "none"; geo = ""; } }
+  function off() {
+    if (!C) return;
+    if (C.style.display !== 'none') { C.style.display = 'none'; }
+    if (L && L.style.height) { L.style.height = ''; L.style.backgroundSize = 'cover'; L.style.backgroundPosition = 'center'; }
+    key = '';
+  }
   function sync() {
     if (!ready()) return;
-    if (!window.matchMedia("(max-width:820px)").matches) { hide(); return; }
-    var cs = getComputedStyle(L);
-    /* Двойник нужен только пока фон прижат к экрану: на десктопе и при reduced-motion
-       (там слой становится position:absolute) он выключен. */
-    if (cs.position !== "fixed" || cs.display === "none") { hide(); return; }
+    if (!window.matchMedia('(max-width:820px)').matches) { off(); return; }
+    /* Двойник нужен только пока фон прижат к экрану: при reduced-motion слой становится
+       position:absolute и никаких полос нет. */
+    if (getComputedStyle(L).position !== 'fixed') { off(); return; }
     var o = window.innerWidth > window.innerHeight ? 1 : 0;
     if (o !== ori) { ori = o; pin = 0; }
-    /* Высота двойника — по САМОМУ БОЛЬШОМУ виденному окну и никогда не уменьшается: пока
-       панель выезжает, окно прыгает 636 ⟷ 733, а картинка должна стоять и покрывать обе зоны. */
-    var lh = L.offsetHeight || 0;
-    if (lh > pin) pin = lh;
-    if (window.innerHeight > pin) pin = window.innerHeight;
-    var lr = L.getBoundingClientRect(), sr = S.getBoundingClientRect();
-    var w = Math.round(window.innerWidth || lr.width);
-    var k = Math.max(w / IW, pin / IH);      /* та же математика, что cover у прижатого слоя */
-    var bw = Math.round(IW * k), bh = Math.round(IH * k);
-    var t = Math.round(lr.top - sr.top), l = Math.round(lr.left - sr.left);
-    /* Место считаем ТОЛЬКО по рамкам (обе читаются в одном кадре) — значение прокрутки в этом
-       вебвью врёт, а разница рамок всегда верна. */
-    var g = t + "|" + l + "|" + w + "|" + pin + "|" + bw;
-    if (g !== geo) {
-      geo = g;
-      C.style.display = "block";
-      C.style.top = t + "px";
-      C.style.left = l + "px";
-      C.style.width = w + "px";
-      C.style.height = pin + "px";
-      C.style.backgroundSize = bw + "px " + bh + "px";
-      C.style.backgroundPosition = "center " + Math.round((pin - bh) / 2) + "px";
+    if (window.innerHeight > pin) pin = window.innerHeight;   /* только вверх, максимум раз за загрузку */
+    var w = Math.round(window.innerWidth);
+    var k = w + '|' + pin;
+    if (k !== key) {
+      key = k;
+      var s = Math.max(w / IW, pin / IH);
+      var bw = Math.round(IW * s), bh = Math.round(IH * s);
+      /* прижатый слой: высота и масштаб в пикселях — больше не «дышит» вместе с окном */
+      L.style.height = pin + 'px';
+      L.style.backgroundSize = bw + 'px ' + bh + 'px';
+      L.style.backgroundPosition = 'center ' + Math.round((pin - bh) / 2) + 'px';
+      /* двойник: тот же масштаб, на всю высоту секции, повтор по вертикали — так он закрывает
+         зону панели на любой позиции прокрутки и при любом сдвиге прижатого слоя */
+      C.style.display = 'block';
+      C.style.backgroundSize = bw + 'px ' + bh + 'px';
+      C.style.backgroundPosition = 'center 0';
+      C.style.backgroundRepeat = 'repeat-y';
     }
-    if (img !== cs.backgroundImage && cs.backgroundImage && cs.backgroundImage !== "none") {
-      img = cs.backgroundImage; C.style.backgroundImage = img;   /* тот же файл — лишней загрузки нет */
-    }
+    var bi = getComputedStyle(L).backgroundImage;
+    if (img !== bi && bi && bi !== 'none') { img = bi; C.style.backgroundImage = bi; }   /* тот же файл — лишней загрузки нет */
   }
-  /* Пересчёт каждый кадр (во время инерционной прокрутки события запаздывают), плюс те же
-     события — страховка, если вебвью притормозит покадровый цикл. */
-  function loop() { sync(); requestAnimationFrame(loop); }
-  requestAnimationFrame(loop);
-  window.addEventListener("scroll", sync, { passive: true });
-  window.addEventListener("resize", sync);
-  window.addEventListener("orientationchange", function () { setTimeout(sync, 250); });
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", sync);
-    window.visualViewport.addEventListener("scroll", sync);
-  }
-  document.addEventListener("DOMContentLoaded", sync);
-  window.addEventListener("load", sync);
+  /* Ни рамок, ни прокрутки не читаем: пересчёт только когда изменилось окно. */
+  sync();
+  window.addEventListener('resize', sync);
+  window.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('orientationchange', function () { setTimeout(sync, 250); });
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', sync);
+  document.addEventListener('DOMContentLoaded', sync);
+  window.addEventListener('load', sync);
+  setTimeout(sync, 400); setTimeout(sync, 1500);
 })();
 </script>
 </body>
