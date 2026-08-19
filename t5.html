@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Тест: что рисуется под нижней панелью</title>
+<style>
+  html,body{margin:0;background:#f2f1ee;color:#1c1b19;font:16px/1.5 -apple-system,'Helvetica Neue',sans-serif}
+  section{position:relative;overflow:hidden;min-height:210vh;padding:40px 20px;box-sizing:border-box}
+  .beige{background:#f2f1ee}
+  .lbl{position:relative;z-index:3;font-weight:700;font-size:34px;margin:0 0 6px}
+  .txt{position:relative;z-index:3;max-width:640px;margin:0 0 18px;font-size:15px}
+  .on-dark .lbl,.on-dark .txt{color:#fff}
+  .row{position:relative;z-index:3;padding:14px 0;border-top:1px solid rgba(255,255,255,0.3);color:#fff;font-size:15px}
+  .ov{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(16,14,12,0.55),rgba(16,14,12,0.64));pointer-events:none}
+  .bg{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100lvh;z-index:0;background:center/cover no-repeat;pointer-events:none}
+  .foot{position:relative;z-index:3;margin-top:34px;padding:10px 12px;background:#fff;color:#000;font-size:14px;border-radius:8px;display:inline-block}
+</style>
+</head>
+<body>
+
+<section class="beige">
+  <p class="lbl">Как проверять</p>
+  <p class="txt">Выдвиньте нижнюю панель Telegram (тапните по экрану, чтобы она появилась) и пролистайте страницу. В каждом разделе A, B, C, D смотрите ТОЛЬКО на узкую зону ЗА нижней панелью: там фотография или ровная полоса? Сделайте по одному скриншоту на каждый раздел — в середине раздела.</p>
+  <p class="txt">Раздел C специально сделан без обрезки — в нём фотография может залезать выше самого раздела. Это ожидаемо, на это не смотрите.</p>
+</section>
+
+<section class="on-dark" id="A" style="clip-path:inset(0 0 0 0);isolation:isolate;background:#2e261f">
+  <div class="bg" data-bg="A"></div>
+  <div class="ov"></div>
+  <p class="lbl">A</p>
+  <p class="txt">как на сайте сейчас: слой ростом в окно, у раздела включена обрезка</p>
+  <div class="row">строка 1</div><div class="row">строка 2</div><div class="row">строка 3</div>
+  <div class="row">строка 4</div><div class="row">строка 5</div><div class="row">строка 6</div>
+  <div class="foot">A — низ экрана под панелью: фото или полоса?</div>
+</section>
+
+<section class="beige" style="min-height:60vh"><p class="txt">между A и B</p></section>
+
+<section class="on-dark" id="B" style="clip-path:inset(0 0 0 0);isolation:isolate;background:#2e261f">
+  <div class="bg" data-bg="B" data-tall="1"></div>
+  <div class="ov"></div>
+  <p class="lbl">B</p>
+  <p class="txt">слой с запасом по высоте, обрезка у раздела ОСТАВЛЕНА</p>
+  <div class="row">строка 1</div><div class="row">строка 2</div><div class="row">строка 3</div>
+  <div class="row">строка 4</div><div class="row">строка 5</div><div class="row">строка 6</div>
+  <div class="foot">B — низ экрана под панелью: фото или полоса?</div>
+</section>
+
+<section class="beige" style="min-height:60vh"><p class="txt">между B и D</p></section>
+
+<section class="on-dark" id="D" style="background:transparent">
+  <div class="ov"></div>
+  <p class="lbl">D</p>
+  <p class="txt">слой с запасом лежит ВНЕ раздела (в самом начале страницы), раздел прозрачный</p>
+  <div class="row">строка 1</div><div class="row">строка 2</div><div class="row">строка 3</div>
+  <div class="row">строка 4</div><div class="row">строка 5</div><div class="row">строка 6</div>
+  <div class="foot">D — низ экрана под панелью: фото или полоса?</div>
+</section>
+
+<section class="beige" style="min-height:60vh"><p class="txt">между D и C</p></section>
+
+<section class="on-dark" id="C" style="isolation:isolate;background:#2e261f">
+  <div class="bg" data-bg="C" data-tall="1"></div>
+  <div class="ov"></div>
+  <p class="lbl">C</p>
+  <p class="txt">слой с запасом, обрезка у раздела СНЯТА (фото может залезать выше — это ожидаемо)</p>
+  <div class="row">строка 1</div><div class="row">строка 2</div><div class="row">строка 3</div>
+  <div class="row">строка 4</div><div class="row">строка 5</div><div class="row">строка 6</div>
+  <div class="foot">C — низ экрана под панелью: фото или полоса?</div>
+</section>
+
+<section class="beige" style="min-height:120vh">
+  <p class="lbl">Конец</p>
+  <p class="txt">Спасибо. Нужны 4 скриншота: A, B, C, D — каждый с выдвинутой нижней панелью.</p>
+</section>
+
+<div style="position:fixed;left:4px;bottom:2px;z-index:400;font:10px/1 ui-monospace,monospace;color:#f0f;pointer-events:none">t5</div>
+
+<script>
+(function () {
+  var SRC = 'assets/bg-session.jpg', PAD = 320, IW = 1536, IH = 1024;
+  var pin = 0, ori = -1, key = '';
+  /* Слой для варианта D — вне разделов, первым элементом страницы */
+  var d = document.createElement('div');
+  d.className = 'bg';
+  d.setAttribute('data-bg', 'D');
+  d.setAttribute('data-tall', '1');
+  document.body.insertBefore(d, document.body.firstChild);
+
+  function fit() {
+    var o = window.innerWidth > window.innerHeight ? 1 : 0;
+    if (o !== ori) { ori = o; pin = 0; }
+    if (window.innerHeight > pin) pin = window.innerHeight;
+    var w = Math.round(window.innerWidth), k = w + '|' + pin;
+    if (k === key) return;
+    key = k;
+    var s = Math.max(w / IW, pin / IH);
+    var bw = Math.round(IW * s), bh = Math.round(IH * s);
+    var all = document.querySelectorAll('.bg'), i, e;
+    for (i = 0; i < all.length; i++) {
+      e = all[i];
+      e.style.backgroundImage = 'url(' + SRC + ')';
+      if (e.getAttribute('data-tall')) {
+        e.style.top = -PAD + 'px';
+        e.style.height = (pin + PAD * 2) + 'px';
+        e.style.backgroundSize = bw + 'px ' + bh + 'px';
+        e.style.backgroundPosition = 'center ' + Math.round(PAD + (pin - bh) / 2) + 'px';
+      }   /* вариант A трогать не надо: пусть остаётся ровно как на сайте (100lvh + cover) */
+    }
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('scroll', fit, { passive: true });
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', function () { setTimeout(fit, 250); });
+})();
+</script>
+</body>
+</html>
