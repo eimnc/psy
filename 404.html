@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f2f1ee">
+<meta name="robots" content="noindex">
+<title>Страница не найдена — Константин Бояркин</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+@font-face{font-family:'Literata';font-style:normal;font-weight:300;font-display:swap;src:url('/assets/fonts/literata-300.woff2') format('woff2')}
+@font-face{font-family:'Literata';font-style:normal;font-weight:500;font-display:swap;src:url('/assets/fonts/literata-500-name.woff2') format('woff2')}
+@font-face{font-family:'Literata';font-style:italic;font-weight:400;font-display:swap;src:url('/assets/fonts/literata-i400.woff2') format('woff2')}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/onest-400.woff2') format('woff2')}
+@font-face{font-family:'Onest';font-style:normal;font-weight:500;font-display:swap;src:url('/assets/fonts/onest-500.woff2') format('woff2')}
+@font-face{font-family:'Onest';font-style:normal;font-weight:600;font-display:swap;src:url('/assets/fonts/onest-600.woff2') format('woff2')}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:#f2f1ee;color:#1c1b19;font-family:'Onest',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1c1b19}
+[data-cta]{transition:transform 90ms ease}
+[data-cta]:active{transform:scale(0.978)}
+@media (hover:hover) and (pointer:fine){
+  [data-link]:hover{color:#1c1b19;border-bottom-color:rgba(28,27,25,0.55)}
+}
+:focus-visible{outline:2px solid #1c1b19;outline-offset:3px;border-radius:4px}
+
+/* --- котик: позы через visibility, НЕ display (iOS Safari не перезапускает CSS-анимацию ног) --- */
+[data-cat]{position:absolute;left:0;bottom:-4.4px;width:76px;height:47.5px;color:#6b6963;cursor:pointer;-webkit-tap-highlight-color:transparent;will-change:transform}
+[data-cat] svg{display:block;width:100%;height:100%;overflow:visible}
+[data-cat] g[data-g]{visibility:hidden}
+[data-cat][data-pose="walk"] g[data-g="walk"]{visibility:visible}
+[data-cat][data-pose="sit"] g[data-g="sit"]{visibility:visible}
+[data-cat][data-pose="sleep"] g[data-g="sleep"]{visibility:visible}
+[data-cat][data-pose="stretch"] g[data-g="stretch"]{visibility:visible}
+[data-cat][data-pose="attent"] g[data-g="attent"]{visibility:visible}
+[data-cat][data-pose="groom"] g[data-g="groom"]{visibility:visible}
+[data-cat] .cat-leg{transform-box:fill-box;transform-origin:50% 4%;animation:catLeg 0.4s ease-in-out infinite alternate}
+[data-cat] .cat-leg.l2{animation-delay:-0.4s}
+@keyframes catLeg{from{transform:rotate(13deg)}to{transform:rotate(-13deg)}}
+[data-cat] .cat-tail{transform-box:fill-box;transform-origin:100% 100%;animation:catTail 1.3s ease-in-out infinite alternate}
+@keyframes catTail{from{transform:rotate(5deg)}to{transform:rotate(-6deg)}}
+[data-cat] .cat-tail-sit{transform-box:fill-box;transform-origin:0% 60%;animation:catTailSit 3.4s ease-in-out infinite alternate}
+@keyframes catTailSit{from{transform:rotate(0deg)}to{transform:rotate(-4deg)}}
+[data-cat] .cat-tail-up{transform-box:fill-box;transform-origin:80% 100%;animation:catTailUp 1.6s ease-in-out infinite alternate}
+@keyframes catTailUp{from{transform:rotate(4deg)}to{transform:rotate(-6deg)}}
+[data-cat] .cat-groom-head{transform-box:fill-box;transform-origin:30% 95%;animation:catGroom 0.85s ease-in-out infinite alternate}
+@keyframes catGroom{from{transform:rotate(-2deg)}to{transform:rotate(6deg)}}
+[data-cat] .cat-groom-paw{transform-box:fill-box;transform-origin:15% 100%;animation:catPaw 0.85s ease-in-out infinite alternate}
+@keyframes catPaw{from{transform:rotate(3deg)}to{transform:rotate(-3deg)}}
+[data-cat] .cat-breath{transform-box:fill-box;transform-origin:50% 100%;animation:catBreath 2.7s ease-in-out infinite alternate}
+@keyframes catBreath{from{transform:scale(1,1)}to{transform:scale(1.015,1.05)}}
+[data-cat] .cat-z{stroke:none;fill:currentColor;font-family:'Literata',Georgia,serif;font-style:italic;animation:catZ 2.4s ease-in-out infinite}
+[data-cat] .cat-z.z2{animation-delay:-1.2s}
+@keyframes catZ{0%,100%{opacity:0}40%{opacity:0.9}}
+[data-cat] .eye-h{display:none}
+[data-cat] g[data-g="sit"] .eye-o{animation:catBlinkO 5.2s linear infinite}
+[data-cat] g[data-g="sit"] .eye-h{display:block;opacity:0;animation:catBlinkH 5.2s linear infinite}
+@keyframes catBlinkO{0%,90.5%,97%,100%{opacity:1}92.5%,95.5%{opacity:0}}
+@keyframes catBlinkH{0%,90.5%,97%,100%{opacity:0}92.5%,95.5%{opacity:1}}
+[data-cat].cat-pet g[data-g="sit"] .eye-o{display:none}
+[data-cat].cat-pet g[data-g="sit"] .eye-h{display:block;opacity:1;animation:none}
+[data-cat].cat-spin [data-cat-flip]{animation:catSpin 1.25s linear both}
+@keyframes catSpin{from{transform:perspective(170px) rotateY(0deg)}to{transform:perspective(170px) rotateY(1440deg)}}
+[data-cat-say]{position:absolute;left:50%;bottom:calc(100% + 4px);transform:translate(-50%,5px);font-family:'Literata',Georgia,serif;font-style:italic;font-size:13px;color:#6b6963;opacity:0;transition:opacity 0.35s ease,transform 0.35s ease;white-space:nowrap;pointer-events:none}
+[data-cat].cat-say [data-cat-say]{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){
+  [data-cat] *{animation:none !important}
+  [data-cta]{transition:none}
+}
+@media (max-width:560px){
+  [data-cat]{width:60px;height:37.5px;bottom:-3.2px}
+}
+</style>
+</head>
+<body>
+
+<header style="padding:22px 24px;text-align:center">
+  <a href="/" style="text-decoration:none;font-family:'Literata',Georgia,serif;font-weight:500;font-size:16.5px;white-space:nowrap">Константин Бояркин</a>
+</header>
+
+<main style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px 24px 64px">
+  <div style="width:100%;max-width:560px;text-align:center">
+    <p style="margin:0;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#94918a">404 — страница не найдена</p>
+    <h1 style="margin:26px 0 0;font-family:'Literata',Georgia,serif;font-weight:300;font-size:clamp(34px,6vw,54px);line-height:1.14;letter-spacing:-0.015em;text-wrap:balance">Такой страницы нет</h1>
+    <p style="margin:22px auto 0;max-width:430px;font-size:16px;line-height:1.7;color:#54524c;text-wrap:pretty">Возможно, в адресе опечатка или страница переехала. На главной всё на месте.</p>
+
+    <div data-shelf style="position:relative;height:1px;margin:76px 0 0;background:#dddbd5">
+      <div data-cat data-pose="sit" role="img" aria-label="Рисунок кота, сидящего на линии">
+        <span data-cat-say>мур</span>
+        <div data-cat-flip style="width:100%;height:100%">
+          <svg viewBox="0 0 48 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <g data-g="walk">
+              <path class="cat-leg" d="M29.8,20.4 L30.4,26.6 L31.6,26.6"></path>
+              <path class="cat-leg l2" d="M27,20.5 L26.6,26.6 L27.8,26.6"></path>
+              <path class="cat-leg l2" d="M18.6,20.4 L19.2,26.6 L20.4,26.6"></path>
+              <path class="cat-leg" d="M16,20.2 L15.2,26.6 L16.4,26.6"></path>
+              <path d="M32.6,13.4 C27.5,11.5 20.5,12.1 16.6,14.4 C14.2,15.9 13.5,18.2 14.6,20.1"></path>
+              <path d="M33.3,15 C32.5,17.2 31.6,19.2 30.6,20.6"></path>
+              <path d="M30.6,20.6 C26.4,22 19.8,21.9 16.2,20.3"></path>
+              <circle cx="36.2" cy="11.6" r="4.1"></circle>
+              <path d="M32.7,9.4 L31.0,6.5 L34.7,7.8"></path>
+              <path d="M35.2,7.6 L37.1,4.1 L38.1,8.0"></path>
+              <path d="M37.4,10.6 L37.4,11.7"></path>
+              <path class="cat-tail" d="M14.9,16.3 C10.4,15.6 7.6,12.2 9,7.9"></path>
+            </g>
+            <g data-g="sit">
+              <path d="M22.9,11.2 C18.6,12.9 15.6,15.7 14.6,19.4 C13.9,21.9 14,24.4 14.3,26.6"></path>
+              <path d="M20.9,26.6 C20.5,24.1 21.3,21.9 23,20.6"></path>
+              <circle cx="26.4" cy="7.9" r="4.3"></circle>
+              <path d="M23,5.5 L22.4,1.4 L25.8,3.3"></path>
+              <path d="M27.4,3.2 L30.2,0.6 L30.9,4.8"></path>
+              <path class="eye-o" d="M27.5,6.9 L27.5,8.1"></path>
+              <path class="eye-h" d="M26.3,7.8 Q27.3,8.7 28.3,7.8"></path>
+              <path d="M29.2,11.9 C30.2,15.5 30.4,21.4 29.9,26.6"></path>
+              <path d="M26.6,17.8 L26.4,26.6"></path>
+              <path d="M25.3,26.6 L31,26.6"></path>
+              <path class="cat-tail-sit" d="M14.4,26.6 C17.4,27.6 23.4,27.5 27.3,26.9 C29.2,26.6 29.6,25.2 28.6,24.3"></path>
+            </g>
+            <g data-g="attent">
+              <path d="M23.1,11 C18.8,12.7 15.8,15.5 14.8,19.2 C14.1,21.7 14.2,24.2 14.5,26.6"></path>
+              <circle cx="26.6" cy="7.7" r="4.3"></circle>
+              <path d="M23.2,5.2 L23,0.8 L26.2,2.9"></path>
+              <path d="M27.6,2.8 L30.6,0.4 L31.1,4.6"></path>
+              <circle cx="27.7" cy="7" r="0.8" fill="currentColor" stroke="none"></circle>
+              <path d="M29.4,11.7 C30.4,15.3 30.6,21.3 30.1,26.6"></path>
+              <path d="M26.8,17.6 L26.6,26.6"></path>
+              <path d="M25.5,26.6 L31.2,26.6"></path>
+              <path class="cat-tail-up" d="M14.6,26.6 C11.8,24.6 10.9,21 12.6,17.8"></path>
+            </g>
+            <g data-g="sleep">
+              <g class="cat-breath">
+                <path d="M10.3,21.2 C9.4,15.4 13.9,10.8 20.4,10.6 C26.9,10.4 31.3,14.2 31.5,18.8 C31.7,23 28,26.2 22.4,26.4 C16.6,26.6 11.2,25.1 10.3,21.2"></path>
+                <path d="M29.8,17.2 C31,19.5 30.3,22.5 27.7,23.7 C25.5,24.6 23.1,23.8 22.2,21.9"></path>
+                <path d="M25.2,15.9 L25.0,13.9 L26.8,14.8"></path>
+                <path d="M27.7,14.9 L29.3,13.6 L29.6,16"></path>
+                <path d="M26.5,19.4 Q27.3,20.1 28.1,19.4"></path>
+                <path d="M10.9,20.4 C13,23.4 17.7,24.4 21.3,23.9"></path>
+              </g>
+              <text class="cat-z" x="33.5" y="9" font-size="5.5">z</text>
+              <text class="cat-z z2" x="37.2" y="4.6" font-size="4.2">z</text>
+            </g>
+            <g data-g="stretch">
+              <path d="M29.1,15.5 C24.4,12.9 18.3,13.4 15.6,17 C13.9,19.3 13.5,23.2 14,26.6"></path>
+              <path d="M30.2,21.8 C25.8,21 21.8,20.5 19.2,21.5"></path>
+              <path d="M18.6,21 L18,26.6 L19.2,26.6"></path>
+              <circle cx="32.4" cy="17.6" r="3.9"></circle>
+              <path d="M29.1,15.5 L27.4,12.8 L30.9,14.0"></path>
+              <path d="M31.5,13.8 L33.3,10.4 L34.2,14.2"></path>
+              <path d="M33.3,17 Q34.1,17.7 34.9,17"></path>
+              <path d="M33.8,20.8 L39.4,26 L40.6,26.2"></path>
+              <path d="M31.6,22.4 L37.2,26.6"></path>
+              <path d="M36.9,26.6 L40.9,26.6"></path>
+              <path d="M15.8,15.4 C13.2,12.2 13.6,8.2 16.6,6.2"></path>
+            </g>
+            <g data-g="groom">
+              <path d="M22.4,12.3 C18.2,14 15.4,16.6 14.5,20 C13.9,22.4 14,24.6 14.3,26.6"></path>
+              <g class="cat-groom-head">
+                <circle cx="25.9" cy="9" r="4.2"></circle>
+                <path d="M22.4,6.8 L20.7,3.9 L24.4,5.2"></path>
+                <path d="M24.9,5.0 L26.8,1.5 L27.8,5.4"></path>
+                <path d="M26.9,8.6 Q27.7,9.3 28.5,8.6"></path>
+              </g>
+              <path class="cat-groom-paw" d="M27.8,18.4 C29.2,16 29,13.4 27.2,12"></path>
+              <path d="M28.8,13 C30,16.4 30.2,21.6 29.7,26.6"></path>
+              <path d="M25.2,26.6 L30.8,26.6"></path>
+              <path class="cat-tail-sit" d="M14.4,26.6 C17.4,27.6 23.4,27.5 27.3,26.9 C29.2,26.6 29.6,25.2 28.6,24.3"></path>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:44px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px 24px">
+      <a data-cta href="/" style="display:inline-flex;align-items:center;gap:9px;background:#1c1b19;color:#f2f1ee;text-decoration:none;font-size:15.5px;font-weight:600;padding:15px 30px;border-radius:999px">
+        <span aria-hidden="true">←</span>На главную
+      </a>
+      <a data-link href="https://t.me/eimnc" target="_blank" rel="noopener noreferrer" style="color:#1c1b19;text-decoration:none;font-size:15.5px;font-weight:500;border-bottom:1px solid rgba(28,27,25,0.3);padding-bottom:2px">Написать в Telegram</a>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  var el = document.querySelector('[data-cat]'), shelf = document.querySelector('[data-shelf]');
+  if (!el || !shelf) return;
+  var flip = el.querySelector('[data-cat-flip]'), say = el.querySelector('[data-cat-say]');
+  var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var C = { x: 0, tx: 0, mode: 'idle', raf: 0, last: 0, timers: [], sayT: 0, attT: 0, petN: 0, petT: 0 };
+
+  var rnd = function (a, b) { return a + Math.random() * (b - a); };
+  var catW = function () { return el.offsetWidth || 76; };
+  var maxX = function () { return Math.max(0, shelf.clientWidth - catW()); };
+  var place = function () { el.style.transform = 'translateX(' + C.x.toFixed(1) + 'px)'; };
+  var pose = function (p) { el.setAttribute('data-pose', p); };
+  var face = function (d) { flip.style.transform = d < 0 ? 'scaleX(-1)' : 'none'; };
+  var wait = function (ms, fn) { C.timers.push(setTimeout(fn, ms)); };
+  var clearWaits = function () { C.timers.forEach(clearTimeout); C.timers = []; };
+  var sayNow = function (t, ms) {
+    say.textContent = t; el.classList.add('cat-say');
+    clearTimeout(C.sayT);
+    C.sayT = setTimeout(function () { el.classList.remove('cat-say'); }, ms || 1600);
+  };
+
+  var step = function (t) {
+    if (C.mode !== 'walk') { C.last = 0; return; }
+    var dt = C.last ? Math.min(48, t - C.last) : 16;
+    C.last = t;
+    var d = C.tx - C.x, mv = 34 * dt / 1000;
+    if (Math.abs(d) <= mv) { C.x = C.tx; place(); C.mode = 'idle'; C.last = 0; arrive(); return; }
+    C.x += d > 0 ? mv : -mv;
+    place();
+    C.raf = requestAnimationFrame(step);
+  };
+
+  var walkTo = function (tx) {
+    C.tx = Math.max(0, Math.min(maxX(), tx));
+    if (Math.abs(C.tx - C.x) < 8) { wait(rnd(900, 1800), idleAct); return; }
+    face(C.tx > C.x ? 1 : -1);
+    pose('walk');
+    C.mode = 'walk';
+    cancelAnimationFrame(C.raf);
+    C.raf = requestAnimationFrame(step);
+  };
+
+  var arrive = function () { pose('sit'); wait(rnd(1100, 2400), idleAct); };
+
+  var idleAct = function () {
+    if (C.mode !== 'idle') return;
+    var r = Math.random();
+    if (r < 0.24) { pose('groom'); wait(rnd(2600, 4200), idleAct); return; }
+    if (r < 0.38) { pose('attent'); wait(rnd(1500, 2500), function () { pose('sit'); wait(rnd(900, 1800), idleAct); }); return; }
+    if (r < 0.48) { pose('sit'); wait(rnd(2800, 5400), idleAct); return; }
+    if (r < 0.56) {
+      pose('sleep');
+      wait(rnd(5200, 9000), function () { pose('stretch'); wait(950, function () { pose('sit'); wait(rnd(800, 1600), idleAct); }); });
+      return;
+    }
+    var m = maxX(), tx = rnd(0, m);
+    if (Math.abs(tx - C.x) < m * 0.28) tx = C.x < m / 2 ? rnd(m * 0.6, m) : rnd(0, m * 0.4);
+    walkTo(tx);
+  };
+
+  el.addEventListener('click', function () {
+    clearWaits();
+    cancelAnimationFrame(C.raf);
+    C.mode = 'idle';
+    C.last = 0;
+    el.classList.remove('cat-spin'); // клик мид-спин «ловит» кота — вращение обрывается
+    pose('sit');
+    var now = Date.now();
+    C.petN = now - C.petT < 7000 ? C.petN + 1 : 1;
+    C.petT = now;
+    if (C.petN >= 5 && !RM) {
+      // мем «у-и-и-а»: пятое поглаживание подряд — вертится волчком
+      C.petN = 0;
+      C.mode = 'spin';
+      el.classList.remove('cat-pet');
+      void el.offsetWidth;
+      el.classList.add('cat-spin');
+      sayNow('у-и-и-а!', 1400);
+      wait(1350, function () {
+        el.classList.remove('cat-spin');
+        C.mode = 'idle';
+        wait(rnd(500, 1200), idleAct);
+      });
+      return;
+    }
+    el.classList.add('cat-pet');
+    sayNow(['мур', 'мрр', 'мяу'][Math.floor(Math.random() * 3)]);
+    if (RM) return;
+    wait(1800, function () { el.classList.remove('cat-pet'); idleAct(); });
+  });
+
+  // курсор подошёл близко — котик оборачивается
+  window.addEventListener('pointermove', function (e) {
+    if (RM || C.mode !== 'idle' || el.classList.contains('cat-pet')) return;
+    var now = Date.now();
+    if (now - C.attT < 5000) return;
+    var r = el.getBoundingClientRect();
+    var dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+    if (Math.abs(dx) > 80 || Math.abs(dy) > 90) return;
+    C.attT = now;
+    clearWaits();
+    face(dx < 0 ? -1 : 1);
+    pose('attent');
+    wait(rnd(1700, 2500), function () { pose('sit'); wait(rnd(800, 1600), idleAct); });
+  }, { passive: true });
+
+  window.addEventListener('resize', function () {
+    var m = maxX();
+    if (C.x > m) { C.x = m; place(); }
+    if (C.tx > m) C.tx = m;
+  });
+
+  C.x = Math.round(maxX() * 0.5);
+  place();
+  pose('sit');
+  if (!RM) wait(1200, idleAct);
+})();
+</script>
+
+</body>
+</html>
