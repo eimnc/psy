@@ -180,7 +180,7 @@
     #contact a[href^="https://t.me/"]:active,
     #contact a[href^="tel:"]:active,
     #formats button[aria-label^="Показать"]:active,
-    #education figure:active,
+    #education [data-gal-card]:active,
     [data-lb-prev]:active,[data-lb-next]:active,[data-lb-close]:active,
     [data-map-close]:active,[data-appr-close]:active,[data-cert-close]:active{transform:scale(0.978);transition:transform 90ms ease}
     nav a[href="#contact"]:active,
@@ -189,7 +189,7 @@
     #contact a[href^="tel:"]:active,
     [data-map-close]:active,[data-appr-close]:active,[data-cert-close]:active{border-color:#1c1b19 !important}
     #formats button[aria-label^="Показать"]:active,
-    #education figure:active{background:#f2f1ee !important}
+    #education [data-gal-card]:active{background:#f2f1ee !important}
     [data-hero-cta] a[href^="https://t.me/"]:active,
     footer a:active,
     [data-map-link]:active,
@@ -197,7 +197,7 @@
     .cert-link:active .cert-link-t,
     [data-s-seg]:active{opacity:0.55;transition:opacity 90ms ease}
     @media (prefers-reduced-motion:reduce){
-      nav a[href="#contact"]:active,[data-hero-cta] a[href="#contact"]:active,#contact a[href^="https://t.me/"]:active,#contact a[href^="tel:"]:active,#formats button[aria-label^="Показать"]:active,#education figure:active,[data-lb-prev]:active,[data-lb-next]:active,[data-lb-close]:active,[data-map-close]:active,[data-appr-close]:active,[data-cert-close]:active{transform:none}
+      nav a[href="#contact"]:active,[data-hero-cta] a[href="#contact"]:active,#contact a[href^="https://t.me/"]:active,#contact a[href^="tel:"]:active,#formats button[aria-label^="Показать"]:active,#education [data-gal-card]:active,[data-lb-prev]:active,[data-lb-next]:active,[data-lb-close]:active,[data-map-close]:active,[data-appr-close]:active,[data-cert-close]:active{transform:none}
     }
     @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
     [data-reveal],[data-reveal-list]>*{will-change:opacity,transform}
@@ -526,7 +526,7 @@
 }
 </style>
 <style>
-@media (min-width:1580px){ [data-gal-row]>div{flex:1 0 0px !important;width:0 !important} }
+@media (min-width:1580px){ [data-gal-row]>div:not([data-gal-card]){flex:1 0 0px !important;width:0 !important} }
 </style>
 </head>
 <body>
@@ -745,48 +745,48 @@
     </div>
     <div data-gal-row="true" style="margin-top:48px;display:flex;gap:16px;overflow-x:auto;padding:8px 24px 24px;scrollbar-width:thin">
       <div style="flex:none;width:max(calc((100vw - 1188px) / 2 - 24px), 0px)"></div>
-      <figure data-lb-open="0" tabindex="0" role="button" aria-label="Открыть: Бакалавриат — диплом с отличием" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
+      <div data-gal-card="true" data-lb-open="0" tabindex="0" role="button" aria-label="Открыть: Бакалавриат — диплом с отличием" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
         <img src="assets/w82/g-bachelor-left.webp" loading="lazy" alt="Диплом бакалавра с отличием" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
-        <figcaption style="padding:13px 6px 6px">
+        <div style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Бакалавриат — диплом с отличием</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">Психология · 2017</div>
-        </figcaption>
-      </figure>
-      <figure data-lb-open="1" tabindex="0" role="button" aria-label="Открыть: Магистратура — диплом с отличием" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
+        </div>
+      </div>
+      <div data-gal-card="true" data-lb-open="1" tabindex="0" role="button" aria-label="Открыть: Магистратура — диплом с отличием" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
         <img src="assets/w82/g-master-ru.webp" loading="lazy" alt="Диплом магистра с отличием" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
-        <figcaption style="padding:13px 6px 6px">
+        <div style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Магистратура — диплом с отличием</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">Социальная и политическая психология · 2019</div>
-        </figcaption>
-      </figure>
-      <figure data-lb-open="2" tabindex="0" role="button" aria-label="Открыть: Магистратура — англоязычный диплом" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
+        </div>
+      </div>
+      <div data-gal-card="true" data-lb-open="2" tabindex="0" role="button" aria-label="Открыть: Магистратура — англоязычный диплом" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
         <img src="assets/w82/g-master-en.webp" loading="lazy" alt="Диплом магистра — англоязычная версия" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
-        <figcaption style="padding:13px 6px 6px">
+        <div style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Магистратура — англоязычный диплом</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">СПбГУ · 2019</div>
-        </figcaption>
-      </figure>
-      <figure data-lb-open="3" tabindex="0" role="button" aria-label="Открыть: Аспирантура" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
+        </div>
+      </div>
+      <div data-gal-card="true" data-lb-open="3" tabindex="0" role="button" aria-label="Открыть: Аспирантура" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
         <img src="assets/w82/g-phd-ru.webp" loading="lazy" alt="Диплом об окончании аспирантуры СПбГУ" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
-        <figcaption style="padding:13px 6px 6px">
+        <div style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Аспирантура</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">Психология · 2023</div>
-        </figcaption>
-      </figure>
-      <figure data-lb-open="4" tabindex="0" role="button" aria-label="Открыть: Аспирантура — англоязычный диплом" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
+        </div>
+      </div>
+      <div data-gal-card="true" data-lb-open="4" tabindex="0" role="button" aria-label="Открыть: Аспирантура — англоязычный диплом" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
         <img src="assets/w82/g-phd-en.webp" loading="lazy" alt="Диплом аспирантуры — англоязычная версия" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
-        <figcaption style="padding:13px 6px 6px">
+        <div style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Аспирантура — англоязычный диплом</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">СПбГУ · 2023</div>
-        </figcaption>
-      </figure>
-      <figure data-lb-open="5" tabindex="0" role="button" aria-label="Открыть: Премия «Хороший доктор 2023»" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #b8b5ae;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="6">
+        </div>
+      </div>
+      <div data-gal-card="true" data-lb-open="5" tabindex="0" role="button" aria-label="Открыть: Премия «Хороший доктор 2023»" style="flex:none;width:236px;margin:0;background:#ffffff;border:1px solid #e2e0db;border-radius:16px;padding:10px;cursor:zoom-in;transition:transform 0.3s ease,border-color 0.3s ease" data-hv="5">
         <img src="assets/w82/g-award.webp" loading="lazy" alt="Премия «Хороший доктор 2023»" style="display:block;width:100%;height:280px;object-fit:cover;object-position:top;border-radius:9px;filter:grayscale(0.25)">
-        <figcaption style="padding:13px 6px 6px">
+        <div style="padding:13px 6px 6px">
           <div style="font-size:14.5px;font-weight:600;color:#1c1b19;line-height:1.35">Премия «Хороший доктор 2023»</div>
           <div style="margin-top:4px;font-size:12.5px;color:#94918a">СберЗдоровье</div>
-        </figcaption>
-      </figure>
+        </div>
+      </div>
       <div style="flex:none;width:max(calc((100vw - 1188px) / 2 - 24px), 12px)"></div>
     </div>
   </section>
@@ -1846,7 +1846,7 @@
         edge(q('#formats [data-reveal-list] > div'), 16);
         qa('#formats button[aria-label^="Показать"]').forEach((n) => edge(n, 16));
         line(q('#education'));
-        qa('#education figure').forEach((n) => edge(n, 14));
+        qa('#education [data-gal-card]').forEach((n) => edge(n, 14));
         line(q('#reviews'));
         line(q('#faq'));
         qa('#faq details.faq').forEach((n) => edge(n, 10));
